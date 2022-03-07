@@ -1,0 +1,16 @@
+//This SCSS file doesn't generate any css rules. It just contains
+//mixins and other functions that will enable other scss files
+//to generate the final css rules
+
+$cdn-path: "../../../assets";
+// $cdn-path: "..";
+@import "../01_atoms/01atomic-variables";
+@import "../01_atoms/02color-variables";
+@import "../01_atoms/03atomic-mixins";
+@import "../01_atoms/04element-global";
+@import "../01_atoms/dialog";
+@import "../01_atoms/icons";
+@import "../01_atoms/button-bg";
+@import "../01_atoms/text-colors";
+@import "../01_atoms/margin-paddings";
+@import "../01_atoms/_shadows";

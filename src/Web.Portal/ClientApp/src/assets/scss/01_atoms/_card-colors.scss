@@ -1,0 +1,35 @@
+$_card-colors: ();
+$_card-colors: map-deep-merge(
+    (
+        "green": (
+            primary: $honey-dew,
+            secondary: $green,
+        ),
+        "red": (
+            primary: $azalea,
+            secondary: $thunderbird,
+        ),
+        "gray": (
+            primary: $very-light-gray,
+            secondary: $nero-gray,
+        ),
+    ),
+    $_card-colors
+);
+
+@mixin cardHeaderColor($_options...) {
+    @for $i from 0 to length($_options) {
+        $_this-option: nth($_options, $i + 1);
+        @if map-has-key($_card-colors, $_this-option) {
+            &.#{$_this-option} {
+                background: map-deep-get($_card-colors, $_this-option, "primary") !important;
+                color: map-deep-get($_card-colors, $_this-option, "secondary") !important;
+                border-color: scale-color(map-deep-get($_card-colors, $_this-option, "primary"), $lightness: -5%);
+                ~ .v-divider {
+                    border-color: scale-color(map-deep-get($_card-colors, $_this-option, "primary"), $lightness: -5%);
+                    border-top-color: transparent;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,146 @@
+$-outer-inner-spacings: [ "margin", "padding" ];
+$-sides: [ "top", "bottom", "left", "right", "x", "y" ];
+
+//HOW TO USE
+//@include margins-paddings([{margin values, separated by comma}],[{padding values, separated by comma}]);
+
+@mixin margins-paddings(
+  $margin-spacings: [ -40,
+  -8,
+  -16,
+  0,
+  1,
+  4,
+  5,
+  8,
+  12,
+  16,
+  17,
+  18,
+  20,
+  24,
+  25,
+  26,
+  28,
+  30,
+  32,
+  37,
+  38,
+  40,
+  46,
+  50,
+  84,
+  100 ],
+  $padding-spacings: [ 0,
+  2,
+  4,
+  8,
+  12,
+  16,
+  24,
+  26,
+  30,
+  32,
+  50 ]
+) {
+  @each $outer-inner-spacing in $-outer-inner-spacings {
+    @each $side in $-sides {
+      @if $outer-inner-spacing == "margin" {
+        @each $margin-spacing in $margin-spacings {
+          @if type_of($margin-spacing) == string {
+            $margin-alacarte: str-split($margin-spacing,"-");
+              .#{str-slice($outer-inner-spacing, 1, 1)}-#{nth($margin-alacarte,1)}-#{nth($margin-alacarte,2)} {
+                @if nth($margin-alacarte,1) == "r" or nth($margin-alacarte,1) == "right" {
+                  margin-right: rem(number(nth($margin-alacarte,2))) !important;
+                }
+                @if nth($margin-alacarte,1) == "l" or nth($margin-alacarte,1) == "left" {
+                  margin-left: rem(number(nth($margin-alacarte,2))) !important;
+                }
+                @if nth($margin-alacarte,1) == "t" or nth($margin-alacarte,1) == "top" {
+                  margin-top: rem(number(nth($margin-alacarte,2))) !important;
+                }
+                @if nth($margin-alacarte,1) == "b" or nth($margin-alacarte,1) == "bottom" {
+                  margin-bottom: rem(number(nth($margin-alacarte,2))) !important;
+                }
+                @if nth($margin-alacarte,1) == "x" or nth($margin-alacarte,1) == "lr" {
+                  margin-left: rem(number(nth($margin-alacarte,2))) !important;
+                  margin-right: rem(number(nth($margin-alacarte,2))) !important;
+                }
+                @if nth($margin-alacarte,1) == "y" or nth($margin-alacarte,1) == "tb" {
+                  margin-top: rem(number(nth($margin-alacarte,2))) !important;
+                  margin-bottom: rem(number(nth($margin-alacarte,2))) !important;
+                }
+              }
+          } @else if type_of($margin-spacing) == number {
+            @if $side == "x" {
+              .#{str-slice($outer-inner-spacing, 1, 1)}-#{str-slice($side, 1, 1)}-#{$margin-spacing},
+              .#{str-slice($outer-inner-spacing, 1, 1)}-lr-#{$margin-spacing} {
+                #{$outer-inner-spacing}-left: rem($margin-spacing) !important;
+                #{$outer-inner-spacing}-right: rem($margin-spacing) !important;
+              }
+            } @else if $side == "y" {
+              .#{str-slice($outer-inner-spacing, 1, 1)}-#{str-slice($side, 1, 1)}-#{$margin-spacing},
+              .#{str-slice($outer-inner-spacing, 1, 1)}-tb-#{$margin-spacing} {
+                #{$outer-inner-spacing}-top: rem($margin-spacing) !important;
+                #{$outer-inner-spacing}-bottom: rem($margin-spacing) !important;
+              }
+            } @else {
+              .#{str-slice($outer-inner-spacing, 1, 1)}-#{str-slice($side, 1, 1)}-#{$margin-spacing},
+              .#{str-slice($outer-inner-spacing, 1, 1)}-#{$side}-#{$margin-spacing} {
+                #{$outer-inner-spacing}-#{$side}: rem($margin-spacing) !important;
+              }
+            }
+          }
+        }
+      } @else if $outer-inner-spacing == "padding" {
+        @each $padding-spacing in $padding-spacings {
+          @if type_of($padding-spacing) == string {
+            $padding-alacarte: str-split($padding-spacing,"-");
+            .#{str-slice($outer-inner-spacing, 1, 1)}-#{nth($padding-alacarte,1)}-#{nth($padding-alacarte,2)} {
+              @if nth($padding-alacarte,1) == "r" or nth($padding-alacarte,1) == "right" {
+                padding-right: rem(number(nth($padding-alacarte,2))) !important;
+              }
+              @if nth($padding-alacarte,1) == "l" or nth($padding-alacarte,1) == "left" {
+                padding-left: rem(number(nth($padding-alacarte,2))) !important;
+              }
+              @if nth($padding-alacarte,1) == "t" or nth($padding-alacarte,1) == "top" {
+                padding-top: rem(number(nth($padding-alacarte,2))) !important;
+              }
+              @if nth($padding-alacarte,1) == "b" or nth($padding-alacarte,1) == "bottom" {
+                padding-bottom: rem(number(nth($padding-alacarte,2))) !important;
+              }
+              @if nth($padding-alacarte,1) == "x" or nth($padding-alacarte,1) == "lr" {
+                padding-left: rem(number(nth($padding-alacarte,2))) !important;
+                padding-right: rem(number(nth($padding-alacarte,2))) !important;
+              }
+              @if nth($padding-alacarte,1) == "y" or nth($padding-alacarte,1) == "tb" {
+                padding-top: rem(number(nth($padding-alacarte,2))) !important;
+                padding-bottom: rem(number(nth($padding-alacarte,2))) !important;
+              }
+            }
+          }
+          @else if type_of($padding-spacing) == number {
+            @if $side == "x" {
+              .#{str-slice($outer-inner-spacing, 1, 1)}-#{str-slice($side, 1, 1)}-#{$padding-spacing},
+              .#{str-slice($outer-inner-spacing, 1, 1)}-lr-#{$padding-spacing} {
+                #{$outer-inner-spacing}-left: rem($padding-spacing) !important;
+                #{$outer-inner-spacing}-right: rem($padding-spacing) !important;
+              }
+            } @else if $side == "y" {
+              .#{str-slice($outer-inner-spacing, 1, 1)}-#{str-slice($side, 1, 1)}-#{$padding-spacing},
+              .#{str-slice($outer-inner-spacing, 1, 1)}-tb-#{$padding-spacing} {
+                #{$outer-inner-spacing}-top: rem($padding-spacing) !important;
+                #{$outer-inner-spacing}-bottom: rem($padding-spacing) !important;
+              }
+            } @else {
+              .#{str-slice($outer-inner-spacing, 1, 1)}-#{str-slice($side, 1, 1)}-#{$padding-spacing},
+              .#{str-slice($outer-inner-spacing, 1, 1)}-#{$side}-#{$padding-spacing} {
+                #{$outer-inner-spacing}-#{$side}: rem($padding-spacing) !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

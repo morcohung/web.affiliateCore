@@ -1,0 +1,12 @@
+.v-list {
+    &::v-deep {
+        .member-list-item {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        .color-blue {
+            color: $blue-link;
+        }
+        @include icon(("icon-award", "icon-history", "icon-document"));
+    }
+}

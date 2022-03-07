@@ -1,0 +1,1 @@
+export const SET_DASHBOARD_INFO = 'SET_DASHBOARD_INFO';

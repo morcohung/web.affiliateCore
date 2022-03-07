@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    @*<script src="~/css/app.css" cdn-hash></script>
+    <script src="~/css/chunk-vendors.css" cdn-hash></script>*@
+    <script src="~/js/chunk-vendors.js" cdn-hash></script>
+    @await Component.InvokeAsync("GlobalVariables")
+    @await Component.InvokeAsync("IOvation")
+</head>
+<body>
+    @RenderBody()
+    <script src="~/js/app.js" cdn-hash></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

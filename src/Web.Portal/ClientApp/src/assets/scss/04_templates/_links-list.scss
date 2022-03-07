@@ -1,0 +1,14 @@
+@include icon(("icon-positive", "icon-link", "icon-qrcode", "icon-search"));
+@import "../02_molecules/outline-styles";
+.search {
+    background-color: #f3f3f3;
+}
+.v-btn--fab {
+    border: 1px solid rgba($white, 0.27) !important;
+    background: $mine-shaft;
+}
+.v-sheet {
+    &::v-deep {
+        @import "../../assets/scss/02_molecules/_v-text-field";
+    }
+}

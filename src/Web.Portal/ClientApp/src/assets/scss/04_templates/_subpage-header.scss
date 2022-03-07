@@ -1,0 +1,23 @@
+.v-app-bar {
+    height: rem(72) !important;
+    &.v-app-bar--fixed {
+        top: rem(72);
+        left: rem(-10);
+        &.v-app-bar--is-scrolled {
+            box-shadow: 0 0 rem(8) rgba($black, 0.3) !important;
+            // transition: margin-top 0.25s;
+            // margin-top: rem(-72) !important;
+        }
+    }
+    &::v-deep {
+        .v-toolbar__content {
+            padding-left: 0;
+            padding-right: 0;
+            height: 100% !important;
+        }
+    }
+}
+.v-btn--fab {
+    border: 1px solid rgba($white, 0.27) !important;
+}
+@include icon(("icon-download", "icon-stick-arrow-left", "icon-settings", "icon-focus", "icon-search", "icon-more"));

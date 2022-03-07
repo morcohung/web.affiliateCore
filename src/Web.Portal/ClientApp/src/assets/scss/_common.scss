@@ -1,0 +1,18 @@
+//Note: It's problematic to include styles here that references
+//external files like images and fonts.
+//instead, include those stylesheets in the the main app.vue
+@import "01_atoms/01atomic-variables";
+@import "01_atoms/02color-variables";
+@import "01_atoms/03atomic-mixins";
+@import "01_atoms/04element-global";
+@import "01_atoms/dialog";
+@import "01_atoms/icons";
+@import "01_atoms/button-bg";
+@import "01_atoms/text-colors";
+@import "01_atoms/margin-paddings";
+@import "01_atoms/_shadows";
+@import "02_molecules/_box-shadows";
+@import "02_molecules/_opacity";
+.theme--light.v-application {
+    background-color: #f7f7f7;
+}

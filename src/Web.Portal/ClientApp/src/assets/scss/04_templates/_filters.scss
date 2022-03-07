@@ -1,0 +1,101 @@
+.v-dialog__content {
+    &::v-deep {
+        .v-icon {
+            font-family: "188Bet";
+            font-style: normal;
+        }
+        @include icon(("icon-stick-arrow-left", "icon-calendar"));
+        @include icon(
+            (
+                "icon-checked",
+                "icon-unchecked",
+                "icon-radio-off",
+                "icon-radio-on",
+                "mdi-chevron-right",
+                "mdi-chevron-left"
+            ),
+            (
+                "class": "v-icon",
+            )
+        );
+        .v-radio {
+            flex-grow: 1;
+            flex-direction: row-reverse;
+            .v-label {
+                flex-grow: 1;
+            }
+        }
+        .v-input--checkbox {
+            flex-grow: 1;
+            .v-input__slot {
+                flex-direction: row-reverse;
+            }
+        }
+        .color-white {
+            color: $white;
+        }
+        .v-bottom-navigation {
+            .v-card {
+                width: 100%;
+                text-align: right;
+            }
+            .v-btn--outlined {
+                border-color: rgba($black, 0.12);
+            }
+        }
+        .radio-list {
+            .v-list-item {
+                min-height: rem(66);
+            }
+        }
+        .v-date-picker-table {
+            height: auto;
+        }
+        .v-picker__body {
+            width: 100% !important;
+            max-width: 100%;
+        }
+    }
+}
+.v-chip {
+    &::v-deep {
+        .v-icon {
+            font-family: "188Bet";
+        }
+        @include icon(
+            ("mdi-close-circle"),
+            (
+                "class": "v-icon",
+            )
+        );
+    }
+}
+.v-btn--outlined {
+    border-color: rgba($black, 0.12);
+}
+
+.with-result {
+    border-color: rgba($black, 0.12) !important;
+    background-color: rgba($black, 0.01) !important;
+}
+.color-blue {
+    color: $blue-link;
+}
+.btn-caret {
+    background-color: rgba($black, 0.08);
+}
+.filter-box {
+    &.mobile {
+        transition: max-height 0.25s;
+        overflow: hidden;
+        &:not(.expanded-filter) {
+            max-height: rem(50);
+        }
+        &.expanded-filter {
+            max-height: rem(5000);
+        }
+    }
+}
+@include icon(("icon-settings", "icon-caretup", "icon-caretdown", "icon-caretleft", "icon-caretright"), ());
+
+@import "../../assets/scss/03_organisms/_side-drawer-dialog";

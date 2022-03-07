@@ -1,0 +1,26 @@
+%-progress {
+  height: auto;
+  border-width: rem(1);
+  border-style: solid;
+  background: transparent;
+  border-radius: 0;
+  margin: 0;
+  position: relative;
+  &.losing {
+    .progress-bar-text {
+      opacity: 0.6;
+    }
+  }
+  &.auto-height {
+    height: auto !important;
+  }
+}
+
+@mixin progress-bar($progresBarName, $progressBarHeight, $progressCornerStyle) {
+  #{$progresBarName} {
+    height: rem($progressBarHeight - 2);
+  }
+  .progress {
+    @extend %-progress;
+  }
+}

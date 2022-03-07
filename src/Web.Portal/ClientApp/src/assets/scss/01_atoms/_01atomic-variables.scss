@@ -1,0 +1,76 @@
+//==================Table of Contents===================================//
+//00. General
+//01. Typography
+//02. Colors
+//03. Paths
+//05. Breakpoints
+//06. Border Radius
+//=====================================================================//
+//00. General
+
+//01. Typography
+
+$base-font-size: 16;
+
+$states: (disabled, highemphasis, midemphasis, error, normal);
+
+$headlineSizes: (
+  1: 96,
+  2: 56,
+  3: 40,
+  4: 32,
+  5: 24,
+  6: 20,
+);
+
+$bodyTextSize: (
+  //class-name: legacy-class-name text-size
+  "xxxs": ("xxxsm", 8),
+  "xxs": ("xxsm", 10),
+  "xs": ("xsm", 12),
+  "sm": ("", 14),
+  "md": ("", 16),
+  "lg": ("", 18),
+  "xl": ("xlg", 20),
+  "xxl": ("", 22),
+  "xxxl": ("", 24),
+  "xxlg": ("", 40),
+  "xxxlg": ("", 60)
+);
+
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+$font-weight-lighter: lighter;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+$font-weight-bolder: bolder;
+
+//02. Colors
+@import "02color-variables";
+
+//03. Paths
+//$cdn-path : '/wp-content/themes/twentyfifteen/';
+$cdn-path: "../../assets";
+
+//04. Shadow depths
+$depth-5: 0 rem(1) rem(1) 0 rgba($black, 0.14), 0 rem(2) rem(1) rem(-1) rgba($black, 0.12),
+  0 rem(1) rem(3) 0 rgba($black, 0.12);
+$depth-10: 0 rem(6) rem(10) 0 rgba($black, 0.14), 0 rem(3) rem(14) rem(-2) rgba($black, 0.2),
+  0 rem(3) rem(5) rem(-1) rgba($black, 0.2);
+$depth-15: 0 rem(8) rem(10) rem(1) rgba($black, 0.14), 0 rem(3) rem(14) rem(2) rgba($black, 0.12),
+  0 rem(5) rem(5) rem(-3) rgba($black, 0.14);
+$depth-20: 0 rem(24) rem(38) rem(3) rgba($black, 0.14), 0 rem(9) rem(46) rem(8) rgba($black, 0.12),
+  0 rem(11) rem(15) rem(-7) rgba($black, 0.02);
+
+//05. Breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+//06. Border Radius
+$border-radius: 4 !default;
+$border-radius-root: $border-radius !default;

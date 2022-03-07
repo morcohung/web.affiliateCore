@@ -1,0 +1,8 @@
+.color-link {
+    color: $blue-link;
+}
+.theme--light.v-btn {
+    &.gray--text {
+        border-color: rgba($black, 0.08);
+    }
+}

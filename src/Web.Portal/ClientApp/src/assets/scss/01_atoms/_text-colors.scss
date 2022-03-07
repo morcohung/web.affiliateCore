@@ -1,0 +1,120 @@
+@mixin text-color(
+  $class-name,
+  $default-color,
+  $isInlined,
+  $hover-color: none,
+  $active-color: none,
+  $focus-color: none
+) {
+  @if $isInlined == true {
+    &#{$class-name} {
+      color: $default-color;
+      @if type_of($hover-color) == color {
+        &:hover {
+          color: $hover-color;
+        }
+      }
+      @if $hover-color == auto {
+        &:hover {
+          @if (lightness($default-color) > 50) {
+            color: scale-color($color: $default-color, $lightness: -25%);
+          } @else {
+            color: scale-color($color: $default-color, $lightness: 25%);
+          }
+        }
+      }
+
+      @if type_of($active-color) == color {
+        &:active {
+          color: $active-color;
+        }
+      }
+      @if $active-color == auto {
+        &:active {
+          @if (lightness($default-color) > 50) {
+            color: scale-color($color: $default-color, $lightness: -35%);
+          } @else {
+            color: scale-color($color: $default-color, $lightness: 35%);
+          }
+        }
+      }
+
+      @if type_of($focus-color) == color {
+        &:focus {
+          color: $focus-color;
+        }
+      }
+      @if $focus-color == auto {
+        &:focus {
+          @if (lightness($default-color) > 50) {
+            color: scale-color($color: $default-color, $lightness: -15%);
+          } @else {
+            color: scale-color($color: $default-color, $lightness: 15%);
+          }
+        }
+      }
+    }
+  } @else {
+    #{$class-name} {
+      color: $default-color;
+      @if type_of($hover-color) == color {
+        &:hover {
+          color: $hover-color;
+        }
+      }
+      @if $hover-color == auto {
+        &:hover {
+          @if (lightness($default-color) > 50) {
+            color: scale-color($color: $default-color, $lightness: -25%);
+          } @else {
+            color: scale-color($color: $default-color, $lightness: 25%);
+          }
+        }
+      }
+
+      @if type_of($active-color) == color {
+        &:active {
+          color: $active-color;
+        }
+      }
+      @if $active-color == auto {
+        &:active {
+          @if (lightness($default-color) > 50) {
+            color: scale-color($color: $default-color, $lightness: -35%);
+          } @else {
+            color: scale-color($color: $default-color, $lightness: 35%);
+          }
+        }
+      }
+
+      @if type_of($focus-color) == color {
+        &:focus {
+          color: $focus-color;
+        }
+      }
+      @if $focus-color == auto {
+        &:focus {
+          @if (lightness($default-color) > 50) {
+            color: scale-color($color: $default-color, $lightness: -15%);
+          } @else {
+            color: scale-color($color: $default-color, $lightness: 15%);
+          }
+        }
+      }
+    }
+  }
+}
+
+// text-color(class name, default text color, hover color, active color, focus color [auto/none/hex color])
+
+@mixin basic-text-color($text-color-list...) {
+  @each $text-color-item in $text-color-list {
+    @if (map-deep-get($text-colors, $text-color-item) != null) {
+      .color-#{$text-color-item} {
+        color: map-deep-get($text-colors, $text-color-item);
+      }
+    } @else {
+      @warn "There's no text color '" + $text-color-item + "' in the list //_text-colors.scss";
+    }
+  }
+}

@@ -1,0 +1,8 @@
+D:\188\web.affiliateCore\src\Affiliate.Token\bin\Debug\netcoreapp3.1\Affiliate.Token.deps.json
+D:\188\web.affiliateCore\src\Affiliate.Token\bin\Debug\netcoreapp3.1\Affiliate.Token.dll
+D:\188\web.affiliateCore\src\Affiliate.Token\bin\Debug\netcoreapp3.1\Affiliate.Token.pdb
+D:\188\web.affiliateCore\src\Affiliate.Token\obj\Debug\netcoreapp3.1\Affiliate.Token.csprojAssemblyReference.cache
+D:\188\web.affiliateCore\src\Affiliate.Token\obj\Debug\netcoreapp3.1\Affiliate.Token.AssemblyInfoInputs.cache
+D:\188\web.affiliateCore\src\Affiliate.Token\obj\Debug\netcoreapp3.1\Affiliate.Token.AssemblyInfo.cs
+D:\188\web.affiliateCore\src\Affiliate.Token\obj\Debug\netcoreapp3.1\Affiliate.Token.dll
+D:\188\web.affiliateCore\src\Affiliate.Token\obj\Debug\netcoreapp3.1\Affiliate.Token.pdb

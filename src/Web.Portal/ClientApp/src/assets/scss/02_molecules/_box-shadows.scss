@@ -1,0 +1,44 @@
+%elevation-4 {
+    box-shadow: 0 0 rem(4) rem(2) rgba(0, 0, 0, 0.02), 0px 0px rem(8) rem(2) rgba(0, 0, 0, 0.02),
+        0px 0px rem(4) rem(-2) rgba(0, 0, 0, 0.04) !important;
+}
+%elevation-5 {
+    box-shadow: 0 0 rem(4) rem(2) rgba(0, 0, 0, 0.04), 0px 0px rem(8) rem(2) rgba(0, 0, 0, 0.04),
+        0px 0px rem(4) rem(-2) rgba(0, 0, 0, 0.08) !important;
+}
+%elevation-0 {
+    box-shadow: none !important;
+}
+
+#app {
+    .v-application {
+        .elevation-4 {
+            @extend %elevation-4;
+        }
+        .elevation-5 {
+            @extend %elevation-5;
+        }
+        .elevation-0 {
+            @extend %elevation-0;
+        }
+    }
+    .v-sheet {
+        &.v-card {
+            &:not(.v-sheet--outlined) {
+                @extend %elevation-4;
+                &.elevation-5 {
+                    @extend %elevation-5;
+                }
+                &.elevation-4 {
+                    @extend %elevation-4;
+                }
+                &.elevation-0 {
+                    @extend %elevation-0;
+                }
+                &.v-card--flat {
+                    @extend %elevation-0;
+                }
+            }
+        }
+    }
+}

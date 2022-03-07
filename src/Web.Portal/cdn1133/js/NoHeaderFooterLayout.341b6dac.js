@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["NoHeaderFooterLayout"],{c4a0:function(e,o,t){"use strict";t.r(o);var n=function(){var e=this,o=e.$createElement,t=e._self._c||o;return t("div",[t("router-view")],1)},r=[],a={name:"NoHeaderFooterLayout"},u=a,c=t("2877"),l=Object(c["a"])(u,n,r,!1,null,null,null);o["default"]=l.exports}}]);
+//# sourceMappingURL=NoHeaderFooterLayout.341b6dac.js.map

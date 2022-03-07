@@ -1,0 +1,599 @@
+// pattern color_name: [_background-color_,_text-color_,_border-color_,_disabled-background-color_,_disabled-text-color_,_hover-background-color_,_hover-text-color_,_focus-background_,_active-background_]
+/// @param {Color} - background-color
+/// @param {Color} - text-color
+/// @param {Color} - border-color
+/// @param {Color} - disabled-background-color
+/// @param {Color} - disabled-text-color
+/// @param {Color} - hover-background-color
+/// @param {Color} - hover-text-color
+/// @param {Color} - focus-background
+/// @param {Color} - active-background
+$-white: ($white, rgba($black, 0.87), scale-color($white, $lightness: -10%),#e5e5e5, scale-color($white, $lightness: -25%), auto, rgba($white, 0.08), auto, auto);
+$-gray: (#c3c3c3, rgba($black, 0.87), scale-color(#c3c3c3, $lightness: -10%), scale-color(#c3c3c3, $lightness: 10%), rgba($black, 0.38), auto, rgba(#000000, 0.08), auto, auto);
+$-dark: (#262626, $white, rgba(scale-color(#262626, $lightness: 10%), 0.87), scale-color(#262626, $lightness: 88%), rgba($black, 0.38), auto, rgba($white, 0.08),auto,auto);
+$-orange: (#ff9200, rgba($black, 0.87), scale-color(#ff9200, $lightness: -10%), scale-color(#262626, $lightness: 88%), rgba($black, 0.38), auto, rgba($white, 0.08), auto, auto);
+$-orange-alt: (#ff9200, rgba($white, 0.87), scale-color(#ff9200, $lightness: -10%), scale-color(#262626, $lightness: 88%), rgba($black, 0.38), auto, rgba($white, 0.08), auto, auto);
+$-blue: (#e0f3fa,#009fd9, rgba(scale-color(#e0f3fa, $lightness: -10%), 0.87), scale-color(#262626, $lightness: 88%), rgba($black, 0.38), auto, rgba($white, 0.08), auto, auto);
+$-green: (#84b752, rgba($white, 0.87), scale-color(#84b752, $lightness: -10%), scale-color(#262626, $lightness: 88%), rgba($black, 0.38), auto, rgba($white, 0.08), auto, auto);
+$-red: (#e24f4f, rgba($white, 0.87), scale-color(#e24f4f, $lightness: -10%), scale-color(#262626, $lightness: 88%), rgba($black, 0.38), auto, rgba($white, 0.08), auto, auto);
+$-yellow: (#ffb604, rgba($black, 0.87), scale-color(#ffb604, $lightness: -10%), scale-color(#262626, $lightness: 88%), rgba($black, 0.08), auto, rgba($white, 0.08), auto, auto);
+$-legacy-gray: (#262626, $white, #ababab, scale-color(#262626, $lightness: 88%), rgba($black, 0.38), rgba($white, 0.08), rgba($white, 0.08), auto, auto);
+$-gainsboro: ($gainsboro-white, $dove-gray, $gainsboro-white, scale-color($gainsboro-white, $lightness: -88%), rgba($gainsboro-white, 0.38), scale-color($gainsboro-white, $lightness: -10%), rgba($gainsboro-white, 0.67), rgba($gainsboro-white, 0.67), rgba($gainsboro-white, 0.12) );
+$-clear-white: (rgba($white, 0), rgba($white, 0.87), rgba($white, 0), scale-color($white, $lightness: -88%), rgba($white, 0.38), rgba($white, 0.02), rgba($white, 0.67), auto, auto);
+$-clean-smoke: ($clean-smoke,rgba($black, 0.87),scale-color($clean-smoke, $lightness: -10%),$clean-smoke,scale-color($clean-smoke, $lightness: -25%),rgba(#ffa301, 0.08), rgba($clean-smoke, 0.08), rgba(#ffa301, 0.08),auto);
+// Note: Separated the color definition above and the usage below to make the code look cleaner and to prevent
+//       text formatters from making the definition hard to read.
+
+
+$button-palette: (
+  "white": $-white,  
+  "gray": $-gray, 
+  "dark": $-dark, 
+  "orange": $-orange, 
+  "orange-alt": $-orange-alt, 
+  "blue": $-blue, 
+  "green": $-green, 
+  "red": $-red, 
+  "yellow": $-yellow, 
+  "legacy-gray": $-legacy-gray, 
+  "gainsboro": $-gainsboro, 
+  "clear-white": $-clear-white,
+  "clean-smoke": $-clean-smoke
+);
+
+//
+@mixin buttonPadding(
+  $topPadNormal,
+  $horizontalPadNormal,
+  $bottomPadNormal,
+  $buttonBorder,
+  $buttonType,
+  $subButtonType
+) {
+  @if contains($subButtonType, "legacyButton") {
+    @if $buttonBorder == has-border {
+      padding: #{(($topPadNormal - 1) / $base-font-size) *
+        1rem}
+        rem($horizontalPadNormal)
+        #{(($bottomPadNormal - 1) / $base-font-size) *
+        1rem};
+    } @else {
+      padding: rem($topPadNormal)
+        rem($horizontalPadNormal)
+        rem($bottomPadNormal);
+    }
+  } @else {
+    @if $buttonBorder == has-border {
+      padding: #{(($topPadNormal - 1) / $base-font-size) *
+        1rem}
+        rem($horizontalPadNormal)
+        #{(($bottomPadNormal - 1) / $base-font-size) *
+        1rem};
+    } @else {
+      padding: rem($topPadNormal)
+        rem($horizontalPadNormal)
+        rem($bottomPadNormal);
+    }
+  }
+}
+
+@mixin buttonColors($buttonType, $colorVal, $buttonBorder) {
+  @if $buttonBorder == has-border {
+    border-width: rem(1);
+    border-style: solid;
+  } @else {
+    border: none;
+  }
+  @if $buttonType ==
+    "text" or
+    $buttonType ==
+    "text-compact" or
+    $buttonType ==
+    "text-large"
+  {
+    background-color: transparent;
+    @if $buttonBorder == has-border {
+      border-color: nth($colorVal, 3) !important;
+    } @else {
+      border: transparent;
+    }
+    color: nth($colorVal, 1) !important;
+    box-shadow: none;
+    &:active {
+      @if (lightness(nth($colorVal, 1)) > 50) {
+        color: scale-color(
+          $color: nth($colorVal, 1),
+          $lightness: -15%
+        ) !important;
+      } @else {
+        color: scale-color(
+          $color: nth($colorVal, 1),
+          $lightness: 25%
+        ) !important;
+      }
+    }
+    &:disabled {
+      color: rgba($black, 0.38) !important;
+    }
+  } @else {
+    background-color: nth($colorVal, 1) !important;
+    border-color: nth($colorVal, 3) !important;
+    // if the button is a chip type
+    @if $buttonType == "chip" or $buttonType == "tag" {
+      color: rgba(nth($colorVal, 2), 0.6);
+    } @else {
+      color: nth($colorVal, 2);
+    }
+    //--end chip type check
+    &:focus {
+      @if (nth($colorVal, 8) == "auto") {
+        background-color: lighten(nth($colorVal, 1), 5%);
+      } @else {
+        background-color: nth($colorVal, 8);
+      }
+
+      @if (lightness(nth($colorVal, 3)) < 50) {
+        border-color: lighten(nth($colorVal, 3), 10%);
+      }
+      color: nth($colorVal, 2);
+    }
+    &:active {
+      @if (nth($colorVal, 9) == "auto") {
+        @if (lightness(nth($colorVal, 1)) > 50) {
+          background-image: radial-gradient(
+            circle,
+            rgba(scale-color(nth($colorVal, 1), $lightness: -70%), 0.12) 5%,
+            transparent 5%
+          );
+        } @else {
+          background-image: radial-gradient(
+            circle,
+            rgba(scale-color(nth($colorVal, 1), $lightness: 70%), 0.12) 5%,
+            transparent 5%
+          );
+        }
+      } @else {
+        background-image: radial-gradient(
+          circle,
+          nth($colorVal, 9) 5%,
+          transparent 5%
+        );
+      }
+    }
+    &:hover {
+      @if (nth($colorVal, 6) == "auto") {
+        @if (lightness(nth($colorVal, 1)) > 50) {
+          background-color: darken(nth($colorVal, 1), 8%);
+          border-color: darken(nth($colorVal, 3), 8%);
+        } @else {
+          background-color: lighten(nth($colorVal, 1), 8%);
+          border-color: lighten(nth($colorVal, 3), 8%);
+        }
+      } @else {
+        background-color: nth($colorVal, 6);
+      }
+
+      color: nth($colorVal, 2);
+    }
+    &:disabled {
+      background: nth($colorVal, 4);
+      color: nth($colorVal, 5);
+      border: rem(1) solid;
+      box-shadow: none;
+      .leading-icon,
+      .trailing-icon {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+//Animations
+@keyframes buttonActivated {
+  from {
+    background-size: 0%;
+  }
+  to {
+    background-size: 3000%;
+    border-color: transparent;
+  }
+}
+
+//Base style for all buttons.
+%btn-default {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bolder;
+  position: relative;
+  padding: rem(10.5) rem(16);
+  background-position: center;
+
+  .betfont {
+    margin: 0;
+    line-height: 1.5em;
+
+    &:before,
+    &:after {
+      display: inline-block;
+      position: relative;
+    }
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  .leading-icon,
+  .trailing-icon {
+    position: absolute;
+    font-weight: normal;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .leading-icon {
+    left: rem(8);
+
+    ~ .cta-description {
+      margin-left: rem(16);
+    }
+  }
+
+  .trailing-icon {
+    right: rem(8);
+
+    ~ .cta-description {
+      margin-right: rem(16);
+    }
+  }
+
+  .cta-description {
+    vertical-align: middle;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:active {
+    background-position: center center;
+    animation: buttonActivated 0.5s forwards;
+  }
+
+  &.mw-5 {
+    min-width: rem(80);
+  }
+}
+
+%leading-trailing-icons {
+  border-radius: 100%;
+  width: rem(20);
+  height: rem(20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: rem(9);
+  background-color: rgba($black, 0.6);
+  color: rgba($white, 0.87);
+  font-weight: normal;
+}
+/// @param {String} $buttonClassName - class name without the "."
+/// @param {Bool} $intrinsicColor - if it will use its own set of colors
+/// @param {String} $buttonColorTheme - Use one of the pre-defined color themes at the top
+/// @param {String} $buttonType - regular-o, compact, compact-o, text, square, circle, expanding, text-large, circle-xs square-sm, chip, regular, large, floating, tag, text-compact
+/// @param {Bool} $buttonBorder - if button will have border or not
+/// @param {String} $textCase - uppercase, lowercase, capitalize
+/// @param {String} $buttondropShadow - has-dropshadow, no-dropshadow
+/// @param {Array} $subButtonType - extra options for future extension
+@mixin buttonStyle(
+  $buttonClassName,
+  $intrinsicColor,
+  $buttonColorTheme,
+  $buttonType,
+  $buttonBorder,
+  $textCase: uppercase,
+  $buttondropShadow: has-dropshadow,
+  $subButtonType: ["normal"]
+) {
+  .#{$buttonClassName} {
+    @extend %btn-default;
+    text-transform: $textCase;
+
+    @if $buttondropShadow == has-dropshadow {
+      box-shadow: $depth-10;
+    } @else {
+      box-shadow: none;
+    }
+
+    @if $buttonType == "compact" or $buttonType == "text-compact" {
+      font-size: rem(14);
+
+      @if contains($subButtonType, "legacy-v-align") {
+        @include buttonPadding(
+          5,
+          20,
+          5,
+          $buttonBorder,
+          $buttonType,
+          $subButtonType
+        );
+      } @else {
+        @include buttonPadding(
+          3.55,
+          16,
+          5.54,
+          $buttonBorder,
+          $buttonType,
+          $subButtonType
+        );
+      }
+
+      height: rem(30);
+    }
+
+    @if $buttonType == "regular" or $buttonType == "text" {
+      font-size: rem(16);
+      line-height: rem(19);
+
+      @if contains($subButtonType, "legacy-v-align") {
+        @include buttonPadding(
+          10,
+          20,
+          10,
+          $buttonBorder,
+          $buttonType,
+          $subButtonType
+        );
+      } @else {
+        @include buttonPadding(
+          7.3,
+          16,
+          11.3,
+          $buttonBorder,
+          $buttonType,
+          $subButtonType
+        );
+      }
+
+      height: rem(40);
+    }
+
+    @if $buttonType == "large" or $buttonType == "text-large" {
+      font-size: rem(16);
+      line-height: rem(19);
+      border-radius: rem(56/2);
+      @include buttonPadding(
+        16.3,
+        20,
+        18.3,
+        $buttonBorder,
+        $buttonType,
+        $subButtonType
+      );
+      height: rem(56);
+    } @else if $buttonType == "circle" {
+      border-radius: 50%;
+    } @else if $buttonType == "circle-sm" {
+      border-radius: 50%;
+    } @else if $buttonType == "circle-xs" {
+      border-radius: 50%;
+    } @else {
+      border-radius: rem(4);
+    }
+
+    @if $buttonType == "floating" or $buttonType == "expanding" {
+      font-size: rem(16);
+      padding: rem(18);
+      height: rem(56);
+      min-width: rem(56);
+      max-width: rem(56);
+      border-radius: rem(56/2);
+      transition: all 0.5s;
+      display: inline-flex !important;
+      justify-content: center;
+
+      .hidden-cta-description {
+        max-height: 1.25rem;
+        max-width: 0;
+        display: inline-block;
+        overflow: hidden;
+        transition: all 0.25s;
+        opacity: 0;
+        line-height: 1.25rem;
+      }
+    }
+
+    @if $buttonType == "circle" {
+      font-size: rem(14);
+      padding: rem(15);
+      height: rem(48);
+      width: rem(48);
+      box-shadow: none;
+    }
+
+    @if $buttonType == "circle-sm" {
+      font-size: rem(10);
+      padding: rem(4);
+      height: rem(32);
+      width: rem(32);
+      box-shadow: none;
+    }
+
+    @if $buttonType == "circle-xs" {
+      font-size: rem(12);
+      padding: rem(0);
+      height: rem(19);
+      width: rem(19);
+    }
+
+    @if $buttonType == "square" {
+      @if contains($subButtonType, "header-use") {
+        font-size: rem(16);
+        padding: rem(8);
+        height: rem(36);
+        width: rem(36);
+
+        .betfont {
+          font-weight: normal;
+        }
+      }
+
+      @if contains($subButtonType, "small-block") {
+        font-size: rem(10);
+        padding: rem(3);
+        height: rem(16);
+        width: rem(16);
+        max-width: rem(16);
+      } @else {
+        font-size: rem(14);
+        padding: rem(8);
+        height: rem(48);
+        width: rem(48);
+        max-width: rem(48);
+      }
+
+      box-shadow: none;
+    }
+
+    @if $buttonType == "square-sm" {
+      font-size: rem(20);
+      padding: 0;
+      height: rem(32);
+      width: rem(32);
+      margin: 0 rem(4);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      .betfont {
+        font-weight: normal;
+      }
+    }
+
+    @if $buttonType == "chip" {
+      font-size: rem(12);
+      box-shadow: none;
+      padding: rem(7) rem(12);
+      height: rem(32);
+      border-radius: #{((32 / $base-font-size) * 1rem) / 2};
+
+      .leading-icon,
+      .trailing-icon {
+        @extend %leading-trailing-icons;
+      }
+
+      .leading-icon {
+        left: rem(4);
+
+        + .cta-description {
+          margin-left: rem(20);
+        }
+      }
+
+      .trailing-icon {
+        + .cta-description {
+          margin-right: rem(20);
+        }
+      }
+    }
+
+    @if $buttonType == "tag" {
+      font-size: rem(12);
+      box-shadow: none;
+      padding: rem(7) rem(12);
+      height: rem(32);
+      border-radius: #{((32 / $base-font-size) * 1rem) / 2};
+
+      .leading-icon,
+      .trailing-icon {
+        @extend %leading-trailing-icons;
+      }
+
+      .leading-icon {
+        left: rem(2);
+
+        + .cta-description {
+          margin-left: rem(20);
+        }
+      }
+
+      .trailing-icon {
+        right: rem(3);
+
+        + .cta-description {
+          margin-right: rem(20);
+        }
+      }
+    }
+
+    @if $buttonType == "expanding" {
+      &.expanded {
+        width: auto;
+        max-width: initial;
+        display: inline-flex !important;
+
+        .hidden-cta-description {
+          max-width: rem(1000);
+          margin-left: rem(8);
+          opacity: 1;
+        }
+      }
+    }
+
+    @if $buttonBorder == has-border {
+      border-width: rem(1);
+      border-style: solid;
+    } @else {
+      border: none;
+    }
+
+    @if $intrinsicColor == true {
+      &.#{$buttonColorTheme} {
+        @include buttonColors($buttonType, map-get($button-palette, $buttonColorTheme), $buttonBorder);
+      }
+    } @else {
+      //generate all colors
+      @each $colorKey, $colorVal in $button-palette {
+        &.#{$colorKey} {
+          @include buttonColors($buttonType, $colorVal, $buttonBorder);
+        }
+      }
+    }
+    &.border-radius-0 {
+      border-radius: 0;
+    }
+  }
+}
+
+//Generate Button CSS
+// buttonStyle(class_name,button_has_own_color{bool},map-get($button-palette,mappedColor),button_type,has_border{bool},is_lower_case_text{bool},has_dropshadow{bool},for_header_use{bool})
+// valid button_types: circle, compact, regular, large, floating, expanding, square, chip, tag, text, text-compact
+
+//Legacy Buttons
+
+//New Buttons
+// @include buttonStyle("btn-compact",false,map-get($button-palette,"orange"),"compact",no-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-compact-o",false,map-get($button-palette,"white"),"compact",has-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-compact-text",false,map-get($button-palette,"white"),"text-compact",no-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-regular",false,map-get($button-palette,"white"),"regular",no-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-regular-o",false,map-get($button-palette,"white"),"regular",has-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-regular-text",false,map-get($button-palette,"white"),"text",no-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-large",false,map-get($button-palette,"white"),"large",no-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-large-o",false,map-get($button-palette,"white"),"large",has-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-large-text",false,map-get($button-palette,"white"),"text-large",no-border,uppercase,no-dropshadow,["header-use"]);
+// @include buttonStyle("btn-flat-icon",false,map-get($button-palette,"white"),"square",no-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-flat-circle",false,map-get($button-palette,"white"),"circle",no-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-flat-circle-sm",false,map-get($button-palette,"white"),"circle-sm",no-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-float-action-reg",false,map-get($button-palette,"white"),"expanding",no-border,uppercase,no-dropshadow,[]);
+// @include buttonStyle("btn-tag",false,map-get($button-palette,"white"),"tag",no-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-tag-o",false,map-get($button-palette,"white"),"tag",has-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-chip",false,map-get($button-palette,"white"),"chip",no-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-chip-o",false,map-get($button-palette,"white"),"chip",has-border,uppercase,has-dropshadow,[]);
+// @include buttonStyle("btn-header-button",false,map-get($button-palette,"white"),"square",has-border,uppercase,has-dropshadow,["header-use"]);
+// @include buttonStyle("box-button-sm",false,map-get($button-palette,"white"),"square-sm",has-border,uppercase,has-dropshadow,["header-use"]);
+// @include buttonStyle("circle-button-xs",false,map-get($button-palette,"white"),"circle-xs",no-border,uppercase,has-dropshadow,[]);

@@ -1,0 +1,26 @@
+%-bar-style {
+  display: flex;
+  align-items: center;
+}
+
+@mixin header(
+  $headerGroupClass: "header-group",
+  $headerHeight: 56,
+  $topPadding: 10,
+  $rightPadding: 16,
+  $bottomPadding: 10,
+  $leftPadding: 16
+) {
+  height: rem($headerHeight);
+  padding: rem($topPadding) rem($rightPadding) rem($bottomPadding) rem($leftPadding);
+  @extend %-bar-style;
+  .#{$headerGroupClass} {
+    &:first-child {
+      padding: rem($topPadding) rem($rightPadding) rem($bottomPadding) #{(($leftPadding/$base-font-size) * 1rem) / 2};
+    }
+    &:last-child {
+      padding: rem($topPadding) 0 rem($bottomPadding) rem($leftPadding);
+    }
+    padding: rem($topPadding) rem($rightPadding);
+  }
+}

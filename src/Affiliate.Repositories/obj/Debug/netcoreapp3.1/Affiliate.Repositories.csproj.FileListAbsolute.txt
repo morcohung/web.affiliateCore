@@ -1,0 +1,11 @@
+D:\188\web.affiliateCore\src\Affiliate.Repositories\bin\Debug\netcoreapp3.1\Affiliate.Repositories.deps.json
+D:\188\web.affiliateCore\src\Affiliate.Repositories\bin\Debug\netcoreapp3.1\Affiliate.Repositories.dll
+D:\188\web.affiliateCore\src\Affiliate.Repositories\bin\Debug\netcoreapp3.1\Affiliate.Repositories.pdb
+D:\188\web.affiliateCore\src\Affiliate.Repositories\bin\Debug\netcoreapp3.1\Affiliate.General.dll
+D:\188\web.affiliateCore\src\Affiliate.Repositories\bin\Debug\netcoreapp3.1\Affiliate.General.pdb
+D:\188\web.affiliateCore\src\Affiliate.Repositories\obj\Debug\netcoreapp3.1\Affiliate.Repositories.csprojAssemblyReference.cache
+D:\188\web.affiliateCore\src\Affiliate.Repositories\obj\Debug\netcoreapp3.1\Affiliate.Repositories.AssemblyInfoInputs.cache
+D:\188\web.affiliateCore\src\Affiliate.Repositories\obj\Debug\netcoreapp3.1\Affiliate.Repositories.AssemblyInfo.cs
+D:\188\web.affiliateCore\src\Affiliate.Repositories\obj\Debug\netcoreapp3.1\Affiliate.Repositories.csproj.CopyComplete
+D:\188\web.affiliateCore\src\Affiliate.Repositories\obj\Debug\netcoreapp3.1\Affiliate.Repositories.dll
+D:\188\web.affiliateCore\src\Affiliate.Repositories\obj\Debug\netcoreapp3.1\Affiliate.Repositories.pdb

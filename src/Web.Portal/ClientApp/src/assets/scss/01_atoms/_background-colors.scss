@@ -1,0 +1,153 @@
+$mid-gray-0: $ash-gray;
+
+$swatch-secondaries: (
+    // secondary-1: #fff8e1,
+    // secondary-2: #ffedb4,
+    // secondary-3: #fee283,
+    // secondary-4: #fed751,
+    // secondary-5: #fecd2a,
+    // secondary-6: #ffc40d,
+    // secondary-7: #ffb604,
+    // secondary-8: #ffa301,
+    // secondary-9: #ff9200,
+    // secondary-10: #ff7200,
+    // secondary-11: #ff9200
+);
+$swatch-reds: (
+    // red-1: #fdeaed,
+    // red-2: #facbd0,
+    // red-3: #e69798,
+    // red-4: #d96f71,
+    // red-5: #e24f4f,
+    // red-6: #e63e36,
+    // red-7: #d73535,
+    // red-8: #c52c2f,
+    // red-9: #b82528,
+    // red-10: #a9191d,
+    // red-11: #e24f4f
+);
+$swatch-primaries: (
+    // primary-1: #fbfbfb,
+    // primary-2: #f6f6f6,
+    clean-smoke: $clean-smoke,
+    // primary-4: #ededed,
+    // primary-5: #e5e5e5,
+    // primary-6: #c3c3c3,
+    // primary-7: #a5a5a5,
+    // primary-8: #a5a5a5,
+    // primary-9: #676767,
+    // primary-10: #474747,
+    // primary-11: #333333,
+    // primary-12: #262626,
+    // primary-13: #111111,
+    // primary-14: #080808,
+    // primary-15: #262626,
+    gainsboro: #e3e3e3,
+    silver: $silver,
+    mine-shaft: #262626,
+    alto: #dddddd
+);
+$swatch-greens: (
+    // green-1: #f2f9eb,
+    // green-2: #deeecc,
+    // green-3: #c9e3ac,
+    // green-4: #b3d88c,
+    // green-5: #a3d072,
+    // green-6: #93c75b,
+    // green-7: #84b752,
+    // green-8: #70a348,
+    // green-9: #5e8f3e,
+    // green-10: #3e6c2e,
+    // green-11: #84b752
+);
+$swatch-blues: (
+    // blue-1: #e1f6fb,
+    // blue-2: #b4e6f6,
+    // blue-3: #83d6f1,
+    // blue-4: #55c6ec,
+    // blue-5: #32b9e9,
+    // blue-6: #0bade7,
+    // blue-7: #009fd9,
+    // blue-8: #008cc6,
+    // blue-9: #007bb2,
+    // blue-10: #005b91,
+    // blue-11: #009fd9
+);
+$swatch-surfaces: (
+    // surface-1: #eeeeee,
+    // surface-2: #000000,
+    // surface-3: #000000,
+    // surface-4: #474747,
+    // surface-5: $white,
+    // surface-6: $white,
+    // surface-7: #262626,
+    // surface-8: #ff9200
+);
+$swatch-state-white: (
+    focus: rgba($white, 24%),
+    disabled: rgba($white, 12%),
+    normal: rgba($white, 38%),
+    active: rgba($white, 24%),
+    hover: rgba($white, 8%),
+    selected: rgba($white, 16%),
+);
+
+@function set-default-text-color($color) {
+    @if (lightness($color) > 50) {
+        @return rgba(#000000, 0.87); // Lighter background, return dark color
+    } @else {
+        @return rgba($white, 0.87); // Darker background, return light color
+    }
+}
+
+@function set-default-border-color($color) {
+    @if (lightness($color) > 50) {
+        @return scale-color($color, $lightness: -2%);
+    } @else {
+        @return scale-color($color, $lightness: 2%);
+    }
+}
+
+@mixin set-background-color($color-array) {
+    @each $key, $val in $color-array {
+        .bg-#{$key} {
+            background-color: $val;
+            color: set-default-text-color($val);
+            border-color: set-default-border-color($val);
+        }
+    }
+}
+
+%dark-mode {
+    background: $mine-shaft;
+}
+%gray-mode {
+    background: $whiter-smoke;
+}
+
+// @each $mainColorGroup in [
+//     $swatch-secondaries,
+//     $swatch-reds,
+//     $swatch-primaries,
+//     $swatch-greens,
+//     $swatch-blues,
+//     $swatch-surfaces
+//     ] {
+//     @each $textColor,$val in $mainColorGroup {
+//         .#{$textColor} {
+//             color: $val;
+//         }
+//     }
+// }
+
+@mixin basic-bg-color($bg-color-list...) {
+    @each $bg-color-item in $bg-color-list {
+        @if (map-deep-get($bg-colors, $bg-color-item) != null) {
+            .#{$bg-color-item} {
+                color: map-deep-get($bg-colors, $bg-color-item);
+            }
+        } @else {
+            @warn "There's no background color '" + $bg-color-item + "' in the list. //_background-colors.scss";
+        }
+    }
+}

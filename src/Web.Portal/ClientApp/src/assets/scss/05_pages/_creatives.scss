@@ -1,0 +1,12 @@
+.bg--gray {
+    background: #f7f7f7;
+}
+.theme--light.v-tabs {
+    &::v-deep {
+        > .v-tabs-bar {
+            background-color: transparent;
+        }
+    }
+}
+@include icon(("icon-positive"));
+@import "../../assets/scss/06_overlaps/_v-tabs.scss";

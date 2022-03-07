@@ -1,0 +1,22 @@
+.color-link {
+    color: $blue-link;
+}
+.theme--light.v-btn {
+    &.gray--text {
+        border-color: rgba($black, 0.08);
+    }
+}
+.v-radio {
+    flex-direction: row-reverse;
+    &::v-deep {
+        .icon-radio-on {
+            color: $orange !important;
+        }
+        @include icon(
+            ("icon-radio-on", "icon-radio-off"),
+            (
+                class: "v-icon",
+            )
+        );
+    }
+}

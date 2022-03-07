@@ -1,0 +1,5 @@
+.v-card {
+    &::v-deep {
+        @import "../../assets/scss/02_molecules/_outline-styles";
+    }
+}

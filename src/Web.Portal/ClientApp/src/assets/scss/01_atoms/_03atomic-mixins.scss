@@ -1,0 +1,663 @@
+//Table of Contentt/////////////////////////////////////////////////////////////////////////////////
+//01. Check if item exists
+//02. Remove Duplicates from Lists/Arrays
+//03. Combine Lists into one, duplicates included
+//04. Purge List
+//05. Debug List
+//06. px to rem
+//07. String Replacement
+//08. Create a box
+//09. Positioning
+//10. Positioning helpers
+//11. Center an element
+//12. Slightly lighten a color
+//13. Slightly darken a color
+//14. Media Breakpoint
+//15. Text Truncate
+//16. Text Sizes
+//17. LTR/RTL Vuetify global mixin
+//18. String Split
+//19. Convert String To Number
+//20. Deep set function to set a value in nested maps
+//21. Map deep get
+//22. Map Merge
+//23. Adv. Type Checking
+//24. Rounded Corners
+//25. Vuetify List Modification
+//26. Flags
+
+//Content///////////////////////////////////////////////////////////////////////////////////////
+
+//01. Check if item in List/Array exists
+@function contains($list, $var) {
+  @return (false == index($list, $var));
+}
+
+//02. Remove Duplicates from Lists/Arrays
+@function remove-duplicates($list, $recursive: false) {
+  $result: ();
+  @each $item in $list {
+    @if not index($result, $item) {
+      @if length($item) > 1 and $recursive {
+        $result: append($result, remove-duplicates($item, $recursive));
+      } @else {
+        $result: append($result, $item);
+      }
+    }
+  }
+  @return $result;
+}
+
+//03. Combine Lists into one, duplicates included
+@function combine-list($collectedList) {
+  $currentList: [];
+  @each $collectedItem in $collectedList {
+    $currentList: join($currentList, $collectedItem, comma);
+  }
+  @return $currentList;
+}
+
+//04. Purge List
+@function purge($list) {
+  $result: ();
+  @each $item in $list {
+    @if $item != null and $item != false and $item != "" {
+      $result: append($result, $item);
+    }
+  }
+  @return $result;
+}
+
+//05. Debug List
+@function debug($list) {
+  $result: #{"[ "};
+  @each $item in $list {
+    @if length($item) >1 {
+      $result: $result#{debug($item)};
+    } @else {
+      $result: $result#{$item};
+    }
+    @if index($list, $item) != length($list) {
+      $result: $result#{", "};
+    }
+  }
+  $result: $result#{" ]"};
+  @return $result;
+}
+
+//06. px to rem
+@function rem($pixelFontSize) {
+  @return #{($pixelFontSize/$base-font-size) * 1rem};
+}
+
+//07. String Replacement
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+  //str-replace($string, 'findthis', 'replacewiththis');
+}
+
+//08. Create a box
+@mixin box($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+//09. Positioning
+@mixin position($position, $args) {
+  @each $o in top right bottom left {
+    $i: index($args, $o);
+    @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number {
+      #{$o}: nth($args, $i + 1);
+    }
+  }
+  position: $position;
+}
+
+//10. Positioning helpers
+@mixin absolute($args: "") {
+  @include position(absolute, $args);
+}
+
+@mixin fixed($args: "") {
+  @include position(fixed, $args);
+}
+
+@mixin relative($args: "") {
+  @include position(relative, $args);
+}
+//@include absolute(top 100% left 0);
+
+//11. Center an element
+@mixin vertical-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+//12. Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color} */
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+//13. Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color} */
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+//14. Media Breakpoint
+@import "../01_atoms/responsive";
+
+//15. Text Truncate
+@mixin text-truncate($lines: 2, $-line-height: 1, $maskColor) {
+  max-height: #{$-line-height * $lines}em;
+  position: relative;
+  padding-right: rem(16);
+  &:before {
+    content: "...";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: rem(16);
+    height: rem(5);
+    margin-top: rem(-10);
+    background: $maskColor;
+    right: 0;
+  }
+}
+
+//16. Text Sizes
+
+@mixin fontSizes($class, $size, $alternateClassName) {
+  @if $alternateClassName != "" {
+    .text-#{$class},
+    .text-#{$alternateClassName} {
+      @include passFontSize($size);
+    }
+  } @else {
+    .text-#{$class} {
+      @include passFontSize($size);
+    }
+  }
+}
+
+@mixin passFontSize($size) {
+  font-size: rem($size) !important;
+}
+
+//17. LTR/RTL Vuetify global mixin
+@mixin rtl() {
+  .v-application--is-rtl & {
+    @content;
+  }
+}
+
+@mixin ltr() {
+  .v-application--is-ltr & {
+    @content;
+  }
+}
+
+//18. String Split
+@function str-split($string, $separator) {
+  // empty array/list
+  $split-arr: ();
+  // first index of separator in string
+  $index: str-index($string, $separator);
+  // loop through string
+  @while $index != null {
+    // get the substring from the first character to the separator
+    $item: str-slice($string, 1, $index - 1);
+    // push item to array
+    $split-arr: append($split-arr, $item);
+    // remove item and separator from string
+    $string: str-slice($string, $index + 1);
+    // find new index of separator
+    $index: str-index($string, $separator);
+  }
+  // add the remaining string to list (the last item)
+  $split-arr: append($split-arr, $string);
+
+  @return $split-arr;
+}
+
+//19. Convert String To Number
+@function number($value) {
+  @if type-of($value) == "number" {
+    @return $value;
+  } @else if type-of($value) != "string" {
+    $_: log("Value for `to-number` should be a number or a string.");
+  }
+
+  $result: 0;
+  $digits: 0;
+  $minus: str-slice($value, 1, 1) == "-";
+  $numbers: (
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+  );
+
+  @for $i from if($minus, 2, 1) through str-length($value) {
+    $character: str-slice($value, $i, $i);
+
+    @if not(index(map-keys($numbers), $character) or $character == ".") {
+      @return to-length(if($minus, -$result, $result), str-slice($value, $i));
+    }
+
+    @if $character == "." {
+      $digits: 1;
+    } @else if $digits == 0 {
+      $result: $result * 10 + map-get($numbers, $character);
+    } @else {
+      $digits: $digits * 10;
+      $result: $result + map-get($numbers, $character) / $digits;
+    }
+  }
+
+  @return if($minus, -$result, $result);
+}
+
+//20. Deep set function to set a value in nested maps
+
+// @access public
+// @param {Map} $map - Map
+// @param {List} $keys -  Key chaine
+// @param {*} $value - Value to assign
+// @return {Map}
+
+@function map-deep-set($map, $keys, $value) {
+  $maps: ($map);
+  $result: null;
+
+  // If the last key is a map already
+  // Warn the user we will be overriding it with $value
+  @if type-of(nth($keys, -1)) == "map" {
+    @warn "The last key you specified is a map; it will be overrided with `#{$value}`.";
+  }
+
+  // If $keys is a single key
+  // Just merge and return
+  @if length($keys) == 1 {
+    @return map-merge(
+      $map,
+      (
+        $keys: $value,
+      )
+    );
+  }
+
+  // Loop from the first to the second to last key from $keys
+  // Store the associated map to this key in the $maps list
+  // If the key doesn't exist, throw an error
+  @for $i from 1 through length($keys) - 1 {
+    $current-key: nth($keys, $i);
+    $current-map: nth($maps, -1);
+    $current-get: map-get($current-map, $current-key);
+    @if $current-get == null {
+      @error "Key `#{$key}` doesn't exist at current level in map.";
+    }
+    $maps: append($maps, $current-get);
+  }
+
+  // Loop from the last map to the first one
+  // Merge it with the previous one
+  @for $i from length($maps) through 1 {
+    $current-map: nth($maps, $i);
+    $current-key: nth($keys, $i);
+    $current-val: if($i == length($maps), $value, $result);
+    $result: map-merge(
+      $current-map,
+      (
+        $current-key: $current-val,
+      )
+    );
+  }
+
+  // Return result
+  @return $result;
+
+  //USAGE: map-deep-set($OBJECT, "<PARENT KEY>" "<CHILD KEY>", VALUE_TO_SET);
+  //EXAMPLE: map-deep-set($o-grid-default-config, "layouts" "M", 650px);
+}
+
+//21. Map deep get
+// @author Hugo Giraudel
+// @access public
+// @param {Map} $map - Map
+// @param {Arglist} $keys - Key chain
+// @return {*} - Desired value
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+//22. Map Merge
+@function map-deep-merge($parent-map, $child-map) {
+  $result: $parent-map;
+  @each $key, $child in $child-map {
+    $parent-has-key: map-has-key($result, $key);
+    $parent-value: map-get($result, $key);
+    $parent-type: type-of($parent-value);
+    $child-type: type-of($child);
+    $parent-is-map: $parent-type == map;
+    $child-is-map: $child-type == map;
+    @if (not $parent-has-key) or ($parent-type != $child-type) or (not ($parent-is-map and $child-is-map)) {
+      $result: map-merge(
+        $result,
+        (
+          $key: $child,
+        )
+      );
+    } @else {
+      $result: map-merge(
+        $result,
+        (
+          $key: map-deep-merge($parent-value, $child),
+        )
+      );
+    }
+  }
+  @return $result;
+}
+
+//23. Adv. Type Checking
+@function is-number($value) {
+  @return type-of($value) == "number";
+}
+
+@function is-time($value) {
+  @return is-number($value) and index("ms" "s", unit($value)) != null;
+}
+
+@function is-duration($value) {
+  @return is-time($value);
+}
+
+@function is-angle($value) {
+  @return is-number($value) and index("deg" "rad" "grad" "turn", unit($value)) != null;
+}
+
+@function is-frequency($value) {
+  @return is-number($value) and index("Hz" "kHz", unit($value)) != null;
+}
+
+@function is-integer($value) {
+  @return is-number($value) and round($value) == $value;
+}
+
+@function is-relative-length($value) {
+  @return is-number($value) and index("em" "ex" "ch" "rem" "vw" "vh" "vmin" "vmax", unit($value)) != null;
+}
+
+@function is-absolute-length($value) {
+  @return is-number($value) and index("cm" "mm" "in" "px" "pt" "pc", unit($value)) != null;
+}
+
+@function is-percentage($value) {
+  @return is-number($value) and unit($value) == "%";
+}
+
+@function is-length($value) {
+  @return is-relative-length($value) or is-absolute-length($value);
+}
+
+@function is-resolution($value) {
+  @return is-number($value) and index("dpi" "dpcm" "dppx", unit($value)) != null;
+}
+
+@function is-position($value) {
+  @return is-length($value) or is-percentage($value) or index("top" "right" "bottom" "left" "center", $value) != null;
+}
+
+//24. Rounded Corners
+
+/// @param
+/// @include rounded("xl", "top", "left", "right", "bottom", "top-left", "top-right", "bottom-left", "bottom-right");
+///  */
+
+/// @access public
+/// @param {$_roundCornerArgs} -- any values from $_rounded-size and $_corner
+
+/// used as class: rounded-t-xl
+
+$_border-radius-root: 0.25rem !default;
+$_corner: ();
+$_rounded-size: ();
+$_rounded-size: map-deep-merge(
+  (
+    "0": 0,
+    "sm": $_border-radius-root / 2,
+    null: $_border-radius-root,
+    "lg": $_border-radius-root * 2,
+    "xl": $_border-radius-root * 4,
+    "xxl": $_border-radius-root * 6,
+    "pill": 9999px,
+    "circle": 50%,
+  ),
+  $_rounded-size
+);
+
+$_corner: map-deep-merge(
+  (
+    "top": "t",
+    "right": "r",
+    "bottom": "b",
+    "left": "l",
+    "top-left": "tl",
+    "top-right": "tr",
+    "bottom-left": "bl",
+    "bottom-right": "br",
+    "all": "a",
+  ),
+  $_corner
+);
+
+@mixin rounded($_roundCornerArgs...) {
+  $_valid-corners: ();
+  $_valid-sizes: ();
+  @for $i from 0 to length($_roundCornerArgs) {
+    $_this-arg: nth($_roundCornerArgs, $i + 1);
+    @if map-has-key($_corner, $_this-arg) {
+      $_valid-corners: append($_valid-corners, unquote($_this-arg), space);
+    }
+
+    @if map-has-key($_rounded-size, $_this-arg) {
+      $_valid-sizes: append($_valid-sizes, unquote($_this-arg), space);
+    }
+  }
+
+  @each $_valid-corner in $_valid-corners {
+    @each $_valid-size in $_valid-sizes {
+      %rounded-all {
+        border-radius: map-deep-get($_rounded-size, $_valid-size);
+      }
+      %rounded-top {
+        border-top-left-radius: map-deep-get($_rounded-size, $_valid-size);
+        border-top-right-radius: map-deep-get($_rounded-size, $_valid-size);
+      }
+      %rounded-bottom {
+        border-bottom-left-radius: map-deep-get($_rounded-size, $_valid-size);
+        border-bottom-right-radius: map-deep-get($_rounded-size, $_valid-size);
+      }
+      %rounded-left {
+        border-top-left-radius: map-deep-get($_rounded-size, $_valid-size);
+        border-bottom-left-radius: map-deep-get($_rounded-size, $_valid-size);
+      }
+      %rounded-right {
+        border-top-right-radius: map-deep-get($_rounded-size, $_valid-size);
+        border-bottom-right-radius: map-deep-get($_rounded-size, $_valid-size);
+      }
+      %rounded-top-left {
+        border-top-left-radius: map-deep-get($_rounded-size, $_valid-size);
+      }
+      %rounded-top-right {
+        border-top-right-radius: map-deep-get($_rounded-size, $_valid-size);
+      }
+      %rounded-bottom-left {
+        border-bottom-left-radius: map-deep-get($_rounded-size, $_valid-size);
+      }
+      %rounded-bottom-right {
+        border-bottom-right-radius: map-deep-get($_rounded-size, $_valid-size);
+      }
+      .rounded-#{map-deep-get($_corner, $_valid-corner)}-#{$_valid-sizes} {
+        @if (map-deep-get($_corner, $_valid-corner) == "a") {
+          @extend %rounded-all;
+          > *:first-child {
+            @extend %rounded-all;
+          }
+        }
+        @if (map-deep-get($_corner, $_valid-corner) == "t") {
+          @extend %rounded-top;
+          > *:first-child {
+            @extend %rounded-top;
+          }
+        }
+        @if (map-deep-get($_corner, $_valid-corner) == "b") {
+          @extend %rounded-bottom;
+          > *:last-child {
+            @extend %rounded-bottom;
+          }
+        }
+        @if (map-deep-get($_corner, $_valid-corner) == "l") {
+          @extend %rounded-left;
+          > *:last-child {
+            @extend %rounded-left;
+          }
+          > *:first-child {
+            @extend %rounded-left;
+          }
+        }
+        @if (map-deep-get($_corner, $_valid-corner) == "r") {
+          @extend %rounded-right;
+          > *:last-child {
+            @extend %rounded-right;
+          }
+          > *:first-child {
+            @extend %rounded-right;
+          }
+        }
+        @if (map-deep-get($_corner, $_valid-corner) == "tl") {
+          @extend %rounded-top-left;
+          > *:first-child {
+            @extend %rounded-top-left;
+          }
+        }
+        @if (map-deep-get($_corner, $_valid-corner) == "tr") {
+          @extend %rounded-top-right;
+          > *:first-child {
+            @extend %rounded-top-right;
+          }
+        }
+        @if (map-deep-get($_corner, $_valid-corner) == "bl") {
+          @extend %rounded-bottom-left;
+          > *:last-child {
+            @extend %rounded-bottom-left;
+          }
+        }
+        @if (map-deep-get($_corner, $_valid-corner) == "br") {
+          @extend %rounded-bottom-right;
+          > *:last-child {
+            @extend %rounded-bottom-right;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin borderRadius($size: null) {
+  @if (map-deep-get($_rounded-size, $size)) {
+    border-radius: map-deep-get($_rounded-size, $size);
+  } @else {
+    @error "There is no defined border size for " + $size;
+  }
+}
+
+///25. Vuetify List Modification
+
+@mixin list-shaped($size) {
+  .v-list-item {
+    &,
+    &::before,
+    .v-ripple__container {
+      //The ltr/rtl mixin is located in 01_atoms/_03atomic-mixins
+      @include ltr() {
+        border-bottom-right-radius: #{rem($size * 0.6666666666666667)} !important;
+        border-top-right-radius: #{rem($size * 0.6666666666666667)} !important;
+      }
+      @include rtl() {
+        border-bottom-left-radius: #{rem($size * 0.6666666666666667)} !important;
+        border-top-left-radius: #{rem($size * 0.6666666666666667)} !important;
+      }
+    }
+  }
+}
+
+@mixin list-rounded($size) {
+  .v-list-item {
+    &,
+    &::before,
+    > .v-ripple__container {
+      border-radius: #{rem($size * 0.6666666666666667)} !important;
+    }
+  }
+}
+///26. Flags
+
+$_flags: (
+  en-gb: (
+    region-name: uk,
+    default-flag-x: 0,
+    default-flag-y: -55,
+    round-flag-x: 0,
+    round-flag-y: 0,
+  ),
+  km-kh: (
+    region-name: cambodia,
+    default-flag-x: -23,
+    default-flag-y: -55,
+    round-flag-x: 0,
+    round-flag-y: 0,
+  ),
+  zh-cn: (
+    region-name: china,
+    default-flag-x: -79,
+    default-flag-y: -92,
+    round-flag-x: 0,
+    round-flag-y: 0,
+  ),
+  id-id: (
+    region-name: indonesia,
+    default-flag-x: -69,
+    default-flag-y: -55,
+    round-flag-x: 0,
+    round-flag-y: 0,
+  ),
+);

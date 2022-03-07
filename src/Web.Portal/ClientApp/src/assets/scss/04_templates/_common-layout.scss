@@ -1,0 +1,9 @@
+@import "../02_molecules/v-btn";
+@import "../02_molecules/v-list";
+@import "../02_molecules/v-text-field";
+@import "../02_molecules/v-container";
+.v-application {
+    .theme--dark.v-btn:hover::before {
+        opacity: 0;
+    }
+}

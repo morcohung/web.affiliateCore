@@ -1,0 +1,23 @@
+.login-drawer {
+    max-width: rem(396);
+    @import "../03_organisms/brand-logo";
+    @include icon(("icon-close"));
+    &::v-deep {
+        @include icon(
+            ("icon-show-password", "icon-hide-password"),
+            (
+                "class": "v-icon",
+            )
+        );
+        @include icon(("stick-arrow-right"));
+        .v-icon {
+            font-size: rem(16);
+        }
+        .text-link--text {
+            color: $blue-link;
+        }
+        .text-link {
+            color: $blue-link;
+        }
+    }
+}

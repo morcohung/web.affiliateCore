@@ -1,0 +1,8 @@
+.pie-chart {
+    &::v-deep {
+        svg {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

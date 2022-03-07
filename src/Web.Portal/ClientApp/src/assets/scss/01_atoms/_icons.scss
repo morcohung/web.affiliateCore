@@ -1,0 +1,464 @@
+$icons: (
+    //common
+    maintenance-2: "\e95d",
+    icon-mobilemenu: "\e95b",
+    ////arrows
+    arrow-out: "\e904",
+    arrow-left: "\e906",
+    arrow-down: "\e907",
+    arrow-right: "\e908",
+    icon-arrowhead-up: "\e965",
+    icon-arrowhead-left: "\e965",
+    icon-arrowhead-right: "\e965",
+    icon-arrowhead-down: "\e965",
+    arrowup-o: "\e966",
+    arrowdown-o: "\e966",
+    arrowleft-o: "\e966",
+    arrowright-o: "\e966",
+    icon-caretdown: "\e6b4",
+    icon-caretup: "\e6b4",
+    icon-caretleft: "\e6b4",
+    icon-caretright: "\e6b4",
+    caretrightthin: "\e626",
+    icon-dual-arrow-right: "\e6b5",
+    icon-caretdownthin: "\e6b4",
+    icon-caretupthin: "\e603",
+    icon-caretleftthin: "\e625",
+    icon-caretrightthin: "\e626",
+    mdi-chevron-left: "\e625",
+    mdi-chevron-right: "\e626",
+    slender-arw-left: "\e671",
+    slender-arw-right: "\e672",
+    //products
+    icon-sports: "\e6c2",
+    icon-racing: "\e800",
+    icon-lotto: "\e6bc",
+    icon-poker: "\e6b8",
+    icon-chess: "\e980",
+    icon-casino: "\e6be",
+    icon-virtual: "\e992",
+    icon-promotions: "\e962",
+    icon-live: "\e6bb",
+    icon-actiongames: "\e909",
+    ////live casino
+    icon-asiagaming: "\e941",
+    icon-dragontigerbaccarat: "\e92c",
+    icon-dragonphoenixbaccarat: "\e92d",
+    icon-dragonbonusbaccarat: "\e92e",
+    icon-grand: "\e618",
+    icon-grand-suite: "\e618",
+    icon-imperial: "\e616",
+    icon-majestic-suite: "\e982",
+    icon-oriental-suite: "\e941",
+    icon-oriental: "\e677",
+    icon-pointbaccarat: "\e92a",
+    icon-roulette: "\e929",
+    icon-royal: "\e617",
+    icon-royal-suite: "\e617",
+    icon-sicbo: "\e928",
+    icon-suites-image-25: "\e941",
+    icon-super6baccarat: "\e927",
+    icon-western-suite: "\e987",
+    //banking
+    alipay: "\e912",
+    icon-sender: "\e984",
+    icon-avatar: "\e984",
+    icon-statement: "\e902",
+    icon-document: "\e971",
+    icon-tandc: "\e971",
+    icon-deposit: "\e952",
+    icon-info-e: "\e989",
+    ////currencies
+    banking-usd: "\e61f",
+    banking-brl: "\e91d",
+    banking-eur: "\e91e",
+    banking-gbp: "\e91f",
+    banking-idr: "\e920",
+    banking-jpy: "\e921",
+    banking-rmb: "\e921",
+    banking-khr: "\e922",
+    banking-krw: "\e923",
+    banking-thb: "\e924",
+    banking-vnd: "\e925",
+    banking-myr: "\e933",
+    //arrows
+    icon-raquo: "\e986",
+    icon-laquo: "\e986",
+    //social media
+    fb: "\e90e",
+    g-plus: "\e90c",
+    pinterest: "\e90a",
+    twitter: "\e90d",
+    weibo: "\e90b",
+    //mailbox
+    announcement: "\e949",
+    icon-announcement: "\e949",
+    icon-compose: "\e948",
+    delete: "\e94d",
+    icon-deletemail: "\e94d",
+    icon-forward: "\e945",
+    inbox: "\e94a",
+    icon-inbox: "\e94a",
+    savedraft: "\e943",
+    icon-markread: "\e94b",
+    icon-markunread: "\e94c",
+    msgdraft: "\e94e",
+    notification: "\e946",
+    paperclip: "\e676",
+    pencil: "\e675",
+    plus: "\e942",
+    icon-reply: "\e945",
+    icon-send: "\e944",
+    trash: "\e674",
+    //others
+    icon-radio-off: "\e906",
+    icon-radio-on: "\e907",
+    lock: "\e934",
+    ios: "\e910",
+    android: "\e911",
+    mobileweb: "\e936",
+    icon-tablegames: "\e6b9",
+    icon-social: "\e6ba",
+    featured: "\e6bd",
+    icon-jackpot: "\e6bf",
+    talkbubble: "\e6c3",
+    icon-chat-with-us: "\e940",
+    box: "\e6c6",
+    icon-phone: "\e6c7",
+    icon-mobile: "\e621",
+    icon-applications: "\e621",
+    trophy: "\e601",
+    user: "\e6b6",
+    icon-search: "\e6b7",
+    lines: "\e6b5",
+    enter: "\e602",
+    info: "\e604",
+    icon-favorite: "\e605",
+    icon-star-o: "\e605",
+    icon-star-filled: "\e612",
+    icon-star-solid: "\e612",
+    icon-close-o: "\e905",
+    mdi-close-circle: "\e905",
+    icon-close: "\e606",
+    mdi-close: "\e905",
+    cal: "\e607",
+    marker: "\e608",
+    clock: "\e609",
+    generic: "\e611",
+    icon-all: "\e60a",
+    updown: "\e60d",
+    turbo: "\e60c",
+    touch: "\e60b",
+    stats: "\e60e",
+    range: "\e60f",
+    past-expires: "\e610",
+    vip-suite: "\e619",
+    icon-cherry: "\e61a",
+    icon-slots: "\e61a",
+    icon-3d: "\e61b",
+    icon-3dslots: "\e61b",
+    luck: "\e61c",
+    gear: "\e613",
+    icon-medal: "\e614",
+    price-tag: "\e615",
+    players: "\e627",
+    icon-check-o: "\e97b",
+    error-o: "\e97c",
+    icon-checked-no-box: "\e61d",
+    icon-check: "\e61d",
+    refresh: "\e600",
+    mail: "\e620",
+    banking: "\e61f",
+    help: "\e61e",
+    sort-down: "\e622",
+    sort-up: "\e623",
+    sort-unsorted: "\e624",
+    icon-hourglass: "\e628",
+    watch: "\e629",
+    icon-box-0: "\e62a",
+    box-1: "\e62b",
+    box-2: "\e62c",
+    box-3: "\e62d",
+    box-4: "\e62e",
+    box-5: "\e62f",
+    box-6: "\e630",
+    box-7: "\e631",
+    box-8: "\e632",
+    box-9: "\e633",
+    icon-lightbulb: "\e634",
+    plus-o: "\e635",
+    minus-o: "\e636",
+    rebate: "\e637",
+    first-deposit: "\e638",
+    redeposit: "\e639",
+    special: "\e63a",
+    icon-filter: "\e63c",
+    winter-sports: "\e63d",
+    winter-olympics: "\e63e",
+    weight-lifting: "\e63f",
+    water-polo: "\e640",
+    volleyball: "\e641",
+    tennis: "\e642",
+    table-tennis: "\e643",
+    swimming: "\e644",
+    specials: "\e962",
+    softball: "\e646",
+    snooker: "\e647",
+    rugby: "\e648",
+    olympics-world: "\e64a",
+    motor-sports: "\e64b",
+    more-sports: "\e64c",
+    miss-u: "\e64d",
+    medal-sports: "\e64e",
+    ice-hockey: "\e652",
+    handball: "\e653",
+    gymnastics: "\e654",
+    golf: "\e655",
+    futsal: "\e656",
+    football: "\e657",
+    field-hockey: "\e659",
+    e-sports: "\e65a",
+    icon-cycling: "\e65b",
+    boxing: "\e65e",
+    beach-volleyball: "\e65f",
+    beach-soccer: "\e660",
+    basketball: "\e661",
+    aussierules: "\e664",
+    athletics: "\e665",
+    archery: "\e666",
+    money-bag: "\e669",
+    caution: "\e668",
+    icon-other: "\e66a",
+    icon-many-more: "\e66a",
+    rules: "\e66b",
+    eye: "\e66c",
+    icon-watch: "\e66d",
+    icon-pie: "\e66e",
+    dollar-roll: "\e66f",
+    flag-pole: "\e670",
+    tools: "\e673",
+    home: "\e67c",
+    user-logged: "\e67d",
+    esports: "\e67e",
+    stream: "\e802",
+    sbk-info: "\e801",
+    bookmark-o: "\e900",
+    bookmark: "\e901",
+    chat: "\e913",
+    icon-18plus: "\e914",
+    icon-settings: "\e90f",
+    help2: "\e915",
+    icon-2016-euro: "\e916",
+    seasonal: "\e917",
+    info2: "\e918",
+    maximize: "\e919",
+    minimize: "\e91a",
+    change: "\e91b",
+    half-box: "\e91c",
+    parlay: "\e92b",
+    threetablebaccarat: "\e926",
+    casinoholdem: "\e92f",
+    blackjack: "\e930",
+    baccarat: "\e931",
+    rss: "\e932",
+    vscasino: "\e935",
+    vsracing: "\e937",
+    sbk-sports: "\e93e",
+    vto: "\e93b",
+    vbl: "\e93c",
+    vfl: "\e93d",
+    vflm: "\e93d",
+    icon-2045: "\e93a",
+    icon-2036: "\e93b",
+    icon-2046: "\e93f",
+    icon-2048: "\e65b",
+    icon-2060: "\e93D",
+    icon-2025: "\e64B",
+    icon-2073: "\e93D",
+    icon-2047: "\e64B",
+    icon-2049: "\e93A",
+    icon-5001: "\e995",
+    icon-5011: "\e994",
+    vhc: "\e93a",
+    vdr: "\e93f",
+    sbk-competitions: "\e939",
+    icon-attention: "\e94f",
+    refresh-thin: "\e950",
+    icon-refresh-2: "\e950",
+    world-cup: "\e951",
+    vfwc: "\e951",
+    messagesent: "\e947",
+    icon-help-o: "\e954",
+    edit: "\e955",
+    camera: "\e953",
+    refresh-h: "\e956",
+    showinput: "\e957",
+    bet-history: "\e958",
+    cancel: "\e959",
+    filter-h: "\e95a",
+    icon-hamburger-menu: "\e95b",
+    icon-home: "\e95c",
+    info3: "\e95e",
+    icon-info3: "\e95e",
+    icon-negative: "\e95f",
+    icon-positive: "\e960",
+    icon-more: "\e961",
+    promo: "\e962",
+    support: "\e963",
+    attention-2: "\e964",
+    user-2: "\e967",
+    settingscog: "\e968",
+    withdraw: "\e969",
+    icon-brandlogo: "\e96a",
+    icon-euro: "\e96a",
+    cash-deposit: "\e972",
+    icon-upload: "\e970",
+    icon-download: "\e99e",
+    sms-banking: "\e96f",
+    net-banking: "\e96e",
+    atm: "\e96d",
+    other-banking: "\e96c",
+    attach: "\e973",
+    showinput-o: "\e937",
+    external-link: "\e96b",
+    icon-refresh-o: "\e974",
+    show-password: "\e957",
+    hide-password: "\e978",
+    icon-show-password: "\e957",
+    icon-hide-password: "\e978",
+    unknown-file: "\e975",
+    banking1: "\e979",
+    icon-profile: "\e97a",
+    pdf-file: "\e976",
+    file: "\e977",
+    icon-vfas: "\e97e",
+    banking-o: "\e979",
+    profileverify: "\e97e",
+    icon-maintenance: "\e97f",
+    finduser: "\e97d",
+    icon-roundrefresh: "\e981",
+    icon-stick-arrow-left: "\e981",
+    icon-stick-arrow-right: "\e981",
+    stick-arrow-left: "\e981",
+    stick-arrow-right: "\e981",
+    chatbubble: "\e980",
+    vfcc: "\e988",
+    icon-ea-n2live: "\e616",
+    EA-N2Live: "\e616",
+    icon-prev: "\e625",
+    glyphicon-chevron-right: "\e626",
+    next: "\e626",
+    glyphicon-star: "\e612",
+    icon-promo-o: "\e962",
+    icon-support-o: "\e963",
+    icon-attach-o: "\e973",
+    icon-checked: "\e990",
+    icon-unchecked: "\e991",
+    icon-warning-3angle: "\e983",
+    icon-flagpole: "\e670",
+    icon-rating-box: "\e938",
+    icon-warning-3angle-o: "\e98a",
+    icon-sub-failed: "\E903:\E90C",
+    icon-sub-success: "\E98D:\E98E",
+    icon-188bet-zh: "\e678",
+    icon-188bet-en: "\e679",
+    icon-eurosuite: "\e99b",
+    // Affiliates
+    icon-logout: "\e996",
+    icon-aboutus: "\e997",
+    icon-creatives: "\e998",
+    icon-payout: "\e999",
+    icon-skype: "\e99a",
+    icon-trashbin: "\e99c",
+    icon-focus: "\e99f",
+    icon-calendar: "\e9a0",
+    mdi-arrow-up: "\e965",
+    mdi-arrow-down: "\e965",
+    icon-award: "\e9a1",
+    icon-history: "\e9a2",
+    icon-link: "\e9a3",
+    icon-qrcode: "\e9a4"
+        // <span class="betfont icon-sub-failed"><span class="path1"></span><span class="path2"></span></span>
+);
+
+@mixin icon($iconList, $-options: ()) {
+    @each $icon in $iconList {
+        @include buildIcons($icon, $-options);
+    }
+}
+
+@mixin buildIcons($icon, $-options: ()) {
+    //set default class
+    $class: "betfont";
+    @if map_has_key($icons, $icon) {
+        //override default class with one defined in function call
+        @if map_has_key($-options, "class") {
+            $class: map-get($-options, "class");
+        }
+        .#{$class} {
+            &.#{$icon} {
+                //for multi-element icon
+                @if str-length(map-get($icons, $icon)) > 1 {
+                    $temp-icon: str-split(map-get($icons, $icon), ":");
+                    @for $icon-entity from 1 through length($temp-icon) {
+                        .path-#{$icon-entity} {
+                            &:before {
+                                content: nth($temp-icon, $icon-entity);
+                            }
+                        }
+                    }
+                    @if $icon == "icon-sub-failed" {
+                        [class^="path-"],
+                        [class*=" path-"] {
+                            margin-left: -1em;
+                        }
+                    }
+                    @if $icon == "icon-sub-success" {
+                        [class^="path-"],
+                        [class*=" path-"] {
+                            margin-left: -1em;
+                        }
+                    }
+                } @else {
+                    &:before {
+                        content: map-get($icons, $icon);
+                        @if $icon == "stick-arrow-right" or $icon == "icon-stick-arrow-right" {
+                            display: inline-block;
+                            transform: rotate(180deg);
+                        }
+                        @if $icon == "icon-arrowhead-down" {
+                            display: inline-block;
+                            transform: rotate(180deg);
+                        }
+                        @if $icon == "icon-laquo" {
+                            display: inline-block;
+                            transform: rotate(180deg);
+                        }
+                        @if $icon == "icon-caretleft" {
+                            display: inline-block;
+                            transform: rotate(90deg);
+                        }
+                        @if $icon == "icon-caretright" {
+                            display: inline-block;
+                            transform: rotate(-90deg);
+                        }
+                        @if $icon == "icon-caretup" {
+                            display: inline-block;
+                            transform: rotate(-180deg);
+                        }
+                        @if $icon == "icon-forward" {
+                            display: inline-block;
+                            transform: scaleX(-1);
+                        }
+                        @if $icon == "mdi-arrow-down" {
+                            display: inline-block;
+                            transform: rotate(-180deg);
+                        }
+                    }
+                }
+            }
+        }
+    } @else {
+        @error "There is no '#{$icon}' defined in 01_atoms/_icons.scss list.";
+    }
+}

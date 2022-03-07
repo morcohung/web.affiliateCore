@@ -1,0 +1,7 @@
+@mixin normalButtonSize($name, $size) {
+    &.v-size--#{$name} {
+        height: rem($size);
+        min-width: rem(round($size * 1.777777777777778)); // default ratio
+        padding: 0 #{rem($size / 2.25)};
+    }
+}

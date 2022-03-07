@@ -1,0 +1,15 @@
+.v-stepper {
+    &::v-deep {
+        .v-stepper__header {
+            .v-stepper__step {
+                padding: rem(2);
+                .v-stepper__step__step {
+                    width: rem(10);
+                    height: rem(10);
+                    min-width: rem(10);
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

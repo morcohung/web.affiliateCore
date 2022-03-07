@@ -1,0 +1,3 @@
+export const SET_CURRENT_LAN = 'SET_CURRENT_LAN';
+export const CHANGE_CURRENT_LAN = 'CHANGE_CURRENT_LAN';
+export const INIT_DEVICE_OS = 'INIT_DEVICE_OS';

@@ -1,0 +1,19 @@
+﻿@using Affiliate.General.Models.Config;
+@using Microsoft.Extensions.Options;
+@inject IOptionsSnapshot<InternalPartnerConfig> settings
+<script type="text/javascript">
+    // basic configuration
+    var io_bbout_element_id = 'io188AffBlackBox'; // populate ioBlackBox in form
+    var io_install_stm = false; // do not install Active X
+    var io_exclude_stm = 12; // do not run Active X
+    var io_install_flash = false; // do not install Flash
+    var io_enable_rip = true; // enable detection of Real IP
+    function GetIovationBlackBox(passTime) {
+        var bb_data = ioGetBlackbox();
+        if (bb_data.finished || passTime > 10) {
+            return bb_data.blackbox;
+        }
+        setTimeout(GetBlackBox(passTime + 1), 100);
+    }
+</script>
+<script src="@settings.Value.IOvationJavascriptSource" type="text/javascript" async></script>

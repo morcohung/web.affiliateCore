@@ -1,0 +1,49 @@
+.brand-logo {
+    background-image: url("../../assets/images/logos-icons.svg");
+    background-size: rem(1000) auto;
+    height: rem(41.63);
+    display: block;
+    @include respond-to(small) {
+        &:not(.no-resize) {
+            background-size: rem(679) auto;
+            height: rem(27.75);
+        }
+    }
+    @include respond-to(xsmall) {
+        &:not(.no-resize) {
+            background-size: rem(679) auto;
+            height: rem(27.75);
+        }
+    }
+    flex-shrink: 0;
+    &:not(.zh-cn) {
+        background-position: 0 0;
+        width: rem(65);
+        @include respond-to(small) {
+            &:not(.no-resize) {
+                width: rem(44);
+            }
+        }
+        @include respond-to(xsmall) {
+            &:not(.no-resize) {
+                width: rem(44);
+            }
+        }
+    }
+    &.zh-cn {
+        background-position: rem(-80) 0;
+        width: rem(77);
+        @include respond-to(small) {
+            &:not(.no-resize) {
+                background-position: rem(-55) 0;
+                width: rem(52);
+            }
+        }
+        @include respond-to(xsmall) {
+            &:not(.no-resize) {
+                background-position: rem(-55) 0;
+                width: rem(52);
+            }
+        }
+    }
+}

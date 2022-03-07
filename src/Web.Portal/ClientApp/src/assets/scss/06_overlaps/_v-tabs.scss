@@ -1,0 +1,28 @@
+.v-tabs {
+    .v-tab {
+        color: rgba($black, 0.87);
+        &.v-tab--active {
+            font-weight: bold;
+        }
+    }
+}
+.theme--light {
+    &.v-tabs-items {
+        background-color: transparent;
+        .v-window-item {
+            border: none;
+        }
+    }
+}
+//removes the blank space on the left of the tab
+//on mobile devices
+.v-tabs {
+    &::v-deep {
+        .v-slide-group--is-overflowing {
+            .v-slide-group__next,
+            .v-slide-group__prev {
+                display: none !important;
+            }
+        }
+    }
+}

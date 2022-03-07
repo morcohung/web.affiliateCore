@@ -1,0 +1,36 @@
+{
+  "JWTConfig": {
+    "Issuer": "morcotest",
+    "SignKey": "morcotest123456789",
+    "AccessTokenExpiresMinutes": "1"
+  },
+  "AESConfig": {
+    "Key": "xuenn",
+    "IV": "1234567890ABCDEF"
+  },
+  "ConnectionStrings": {
+    "AIP2Connection": "Data Source=172.17.1.57;Initial Catalog=AIP2;User ID=aip2_user;Password=qpassword;Persist Security Info=True;",
+    "AIP2XUENNConnection": "Data source=XDMQA;User id=xdmuser_write;Password=password;",
+    "RedisConnectionString": "172.17.1.60:6666,172.17.1.21:6666,password=188message",
+    "IpCountryConnectionString": "data source=Config\\ipcountry.imdb",
+    "IpAllowConnectionstr": "data source=..\\..\\..\\Config\\ipallow.imdb;page size=1024000;cache size=1024000;synchronous=Off;pooling=true;read only=true;max pool size = 100;",
+    "Ip2Location": "kcluster01.188bet.qat:31301,kcluster01.188bet.qat:31302,password=tsa73sKcx4aQJHRK"
+  },
+  "InternalPartner": {
+    "iOvationEnabled": "true",
+    "iOvationSuffix": "_18AF",
+    "iOvationUrlHost": "http://spi-agilecheck.188bet.test",
+    "iOvationUrlService": "/Loginservice.svc/GetAccessType",
+    "iOvationBusinessUnitId": "360",
+    "iOvationJavascriptSource": "https://ci-mpsnare.iovation.com/snare.js",
+    "cdnContentAddress": "http://cdn.188bet.test/Contents/aff",
+    "cdnFolderPathForWatcher": "C:\\application\\contents\\aff",
+    "regionManagementSPIURL": "http://spi-iowb.188bet.test/api/Region/GetAllCountryAccessibilities"
+  },
+  "GoogleAnalytics": {
+    "GoogleTagId": "GTM-KNJW8HL"
+  },
+  "SubDomainSetting": {
+    "CDN": "http://localhost:8080"
+  }
+}

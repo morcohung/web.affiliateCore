@@ -1,0 +1,62 @@
+@include icon(("icon-stick-arrow-left"));
+.banner-detail {
+    .v-card.main-content {
+        height: 100%;
+    }
+    .close {
+        position: relative;
+        z-index: 10;
+        background-color: #e5e5e5;
+    }
+    .banner-info {
+        transform: scale(1);
+        &.mobile {
+            width: 100%;
+        }
+        &.desktop {
+            width: rem(396);
+        }
+        .banner-info-content {
+            .spacer {
+                width: 50%;
+            }
+        }
+        .v-list-item {
+            &:not(.text-right) {
+                white-space: nowrap;
+            }
+            .text-right {
+                min-width: 30%;
+            }
+        }
+        .pre-filled {
+            .v-input__slot {
+                &:before,
+                &:after {
+                    display: none;
+                }
+            }
+        }
+        overflow-y: auto;
+        background: $white;
+        position: relative;
+        z-index: 10;
+
+        &.tablet {
+            min-height: 30%;
+        }
+        &.mobile {
+            min-height: 60%;
+        }
+    }
+    .v-app-bar {
+        height: rem(72);
+
+        top: 0;
+        .v-toolbar__content {
+            height: 100%;
+            padding-left: rem(32);
+            padding-right: rem(32);
+        }
+    }
+}

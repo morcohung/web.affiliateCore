@@ -1,0 +1,79 @@
+@font-face {
+  font-family: "Lato";
+  font-weight: 400;
+  src: url("#{$cdn-path}/fonts/Lato-Regular.woff2") format("woff2"),
+    url("#{$cdn-path}/fonts/Lato-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lato";
+  font-style: italic;
+  src: url("#{$cdn-path}/fonts/Lato-Italic.woff2") format("woff2"),
+    url("#{$cdn-path}/fonts/Lato-Italic.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lato";
+  font-weight: 700;
+  src: url("#{$cdn-path}/fonts/Lato-Bold.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "188Bet";
+  src: url("#{$cdn-path}/fonts/188Bet.woff2") format("woff2");
+  font-display: swap;
+}
+
+body {
+  .v-application {
+    @extend %-default-typography;
+  }
+}
+// input,
+// textarea,
+// select {
+//   @include defaultTypography();
+// }
+
+@mixin defaultTypography($forBodyTag: false) {
+  font-family: "Lato", Helvetica, Tahoma, sans-serif;
+  letter-spacing: rem(-0.16);
+  @if $forBodyTag {
+    .ja-jp &,
+    &.ja-jp {
+      font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "Meiryo", "メイリオ", "Osaka", "MS PGothic",
+        "ＭＳ Ｐゴシック", sans-serif;
+    }
+  }
+  %-common-icon-font-style {
+    font-family: "188Bet";
+    font-weight: normal;
+    font-style: normal;
+  }
+  .betfont {
+    @extend %-common-icon-font-style;
+  }
+  .v-icon.icon {
+    @extend %-common-icon-font-style;
+    &:before {
+      @extend %-common-icon-font-style;
+    }
+  }
+}
+
+%-default-typography {
+  @include defaultTypography(true);
+}
+
+body {
+  .v-application {
+    @extend %-default-typography;
+  }
+}
+
+@each $key, $val in $bodyTextSize {
+  @include fontSizes($key, nth($val, 2), nth($val, 1));
+}

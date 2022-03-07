@@ -1,0 +1,26 @@
+@import "../01_atoms/_05vuetify-variables.sass";
+.v-application {
+    .v-btn {
+        &:not(.v-btn--round) {
+            @each $name, $size in $btn-sizes {
+                &.v-size--#{$name} {
+                    height: rem($size);
+                    min-width: rem(round($size * 1.777777777777778)); // default ratio
+                    padding: 0 rem($size / 2.25);
+                }
+            }
+        }
+    }
+    .v-btn--icon {
+        @each $name, $size in $btn-sizes {
+            &.v-size--#{$name} {
+                height: rem($size);
+                width: rem($size);
+            }
+        }
+    }
+}
+.theme--dark.v-btn--active:before,
+.theme--dark.v-btn--active:hover:before {
+    opacity: 0;
+}

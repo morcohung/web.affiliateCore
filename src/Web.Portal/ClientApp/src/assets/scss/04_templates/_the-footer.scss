@@ -1,0 +1,67 @@
+.the-footer {
+    &::v-deep {
+        min-height: rem(576);
+        &.allow-scroll {
+            min-height: 83vh;
+        }
+        .v-sheet {
+            &.dark {
+                background-color: $mine-shaft;
+                min-height: 50vh;
+            }
+            h4 {
+                color: rgba($white, 0.6);
+            }
+            .color-gray {
+                color: rgba($white, 0.6);
+            }
+            .v-avatar {
+                color: rgba($white, 0.6);
+            }
+            .v-list-item {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .useful-links,
+            .contact-points {
+                a {
+                    color: rgba($white, 0.6);
+                    text-decoration: none;
+                }
+            }
+        }
+        .no-wrap {
+            white-space: nowrap;
+        }
+        .footer-logos {
+            &.sponsors {
+                &.F1 {
+                    width: rem(220);
+                    height: rem(100);
+                    background-size: rem(220) auto;                  
+                    background-image: url("https://doc.188contents.com/contents/images/logo/f1/f1-logo.png");                              
+                }
+                &.werder {
+                    width: rem(220);
+                    height: rem(100);
+                    background-size: rem(220) auto;
+                    background-position: rem(0) rem(-25);
+                    background-image: url("https://doc.188contents.com/contents/images/logo/bwf/750x323-bwf-new-logo.png");  
+                }
+            }
+        }
+        @include icon(("icon-phone", "icon-inbox", "icon-skype"));
+        .copyright-text {
+            line-height: 1.8em;
+        }
+    }
+}
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.25s, transform 0.12s;
+}
+.fade-enter,
+.fade-leave-to {
+    transform: translateY(rem(100));
+    opacity: 0;
+}

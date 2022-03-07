@@ -1,0 +1,8 @@
+.test-image {
+    background-image: url("./assets/images/raster-logos-2x.png");
+    background-size: rem(1250);
+    height: 500px;
+    width: 1000px;
+    border: 1px solid black;
+}
+@include icon("icon-close");

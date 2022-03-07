@@ -1,0 +1,52 @@
+%reset-text-style {
+  text-decoration: none;
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+%reset-border-style {
+  border: none;
+  &:hover,
+  &:active,
+  &:focus {
+    border: none;
+  }
+}
+
+%reset-anchors {
+  text-decoration: none;
+}
+
+%ellipsis {
+  position: relative;
+  padding-right: rem(16);
+  overflow: hidden;
+  &:before {
+    content: "\2026";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    height: rem(5);
+    width: rem(14);
+  }
+}
+
+%v-input-mod {
+  .v-input {
+    &.v-text-field--outlined {
+      &.theme--light {
+        fieldset {
+          border-color: rgba($black, 0.3);
+        }
+      }
+    }
+  }
+}

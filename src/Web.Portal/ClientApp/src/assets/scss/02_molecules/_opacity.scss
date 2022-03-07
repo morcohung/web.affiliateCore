@@ -1,0 +1,5 @@
+@for $opacity from 1 through 10 {
+    .opacity-#{$opacity*10} {
+        opacity: $opacity * 0.1;
+    }
+}

@@ -1,0 +1,1 @@
+export const SET_PAYMENT_INFO = 'SET_PAYMENT_INFO';

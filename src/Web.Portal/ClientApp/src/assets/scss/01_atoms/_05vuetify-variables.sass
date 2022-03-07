@@ -1,0 +1,735 @@
+//MIXINS
+/* Merge objects
+@function map-deep-merge($parent-map, $child-map)
+    $result: $parent-map
+
+    @each $key, $child in $child-map
+        $parent-has-key: map-has-key($result, $key)
+        $parent-value: map-get($result, $key)
+        $parent-type: type-of($parent-value)
+        $child-type: type-of($child)
+        $parent-is-map: $parent-type == map
+        $child-is-map: $child-type == map
+
+        @if not $parent-has-key or $parent-type != $child-type or not ($parent-is-map and $child-is-map)
+            $result: map-merge($result, ($key: $child))
+        @else
+            $result: map-merge($result, ($key: map-deep-merge($parent-value, $child)))
+
+    @return $result
+/* Set objects
+@function map-deep-set($map, $keys, $value)
+  $maps: ($map,)
+  $result: null
+  @if type-of(nth($keys, -1)) == "map"
+    @warn "The last key you specified is a map; it will be overrided with `#{$value}`."
+  @if length($keys) == 1
+    @return map-merge($map, ( $keys: $value ))
+  @for $i from 1 through length($keys) - 1
+    $current-key: nth($keys, $i)
+    $current-map: nth($maps, -1)
+    $current-get: map-get($current-map, $current-key)
+    @if $current-get == null
+      @error "Key `#{$key}` doesn't exist at current level in map."
+    $maps: append($maps, $current-get)
+  @for $i from length($maps) through 1
+    $current-map: nth($maps, $i)
+    $current-key: nth($keys, $i)
+    $current-val: if($i == length($maps), $value, $result)
+    $result: map-merge($current-map, ($current-key: $current-val))
+  @return $result
+
+/*Convert px to rem
+@function rem($size)
+    $remSize: $size / 16
+
+    //Default font size on html element is 100%, equivalent to 16px;
+    @return #{$remSize}rem
+
+/*globals
+$font-size-root: 16px
+$blockquote-font-size: rem(18)
+$body-font-family: "Lato", sans-serif
+$border-radius-root: rem(4)
+$code-kbd-border-radius: rem(3)
+$input-top-spacing: rem(16)
+$line-height-root: 1.2
+$text-field-active-label-height: rem(12)
+$body-font-family: 'Lato', sans-serif
+$heading-font-family: $body-font-family
+$headings: ()
+$headings: map-deep-merge(('h1': ('size': 6rem,'weight': 300,'line-height': 6rem, 'letter-spacing': -.015625em,'font-family': $heading-font-family,'text-transform': false ), 'h2': ('size': 3.75rem,'weight': 300,'line-height': 3.75rem,'letter-spacing': -.0083333333em,'font-family': $heading-font-family,'text-transform': false),'h3': ('size': 3rem, 'weight': 400,'line-height': 3.125rem,'letter-spacing': normal,'font-family': $heading-font-family,'text-transform': false ),'h4': ('size': 2.125rem,'weight': 400,'line-height': 2.5rem,'letter-spacing': .0073529412em,'font-family': $heading-font-family,'text-transform': false),'h5': ('size': 1.5rem,'weight': 400,'line-height': 2rem,'letter-spacing': normal,'font-family': $heading-font-family,'text-transform': false), 'h6': ( 'size': 1.25rem,'weight': 500,'line-height': 2rem,'letter-spacing': .0125em,'font-family': $heading-font-family,'text-transform': false),'subtitle-1': ('size': 1rem,'weight': normal,'line-height': 1.75rem, 'letter-spacing': .009375em, 'font-family': $body-font-family,'text-transform': false),'subtitle-2': ('size': .875rem, 'weight': 500,'line-height': 1.375rem,'letter-spacing': .0071428571em,'font-family': $body-font-family,'text-transform': false), 'body-1': ('size': 1rem,'weight': 400,'line-height': 1.5rem,'letter-spacing': .03125em,'font-family': $body-font-family,'text-transform': false),'body-2': ('size': .875rem,'weight': 400,'line-height': 1.25rem,'letter-spacing': .0178571429em,'font-family': $body-font-family,'text-transform': false),'button': ('size': .875rem,'weight': 500,'line-height': 2.25rem,'letter-spacing': .0892857143em,'font-family': $body-font-family,'text-transform': uppercase),'caption': ('size': .75rem,'weight': 400,'line-height': 1.25rem,'letter-spacing': .0333333333em,'font-family': $body-font-family,'text-transform': false),'overline': ('size': .75rem,'weight': 500,'line-height': 2rem,'letter-spacing': .1666666667em,'font-family': $body-font-family,'text-transform': uppercase )),$headings)
+$spacer: rem(4)
+
+/*Breakpoints*/
+$grid-breakpoints: ('xs': 0,'sm': 376px,'md': 601px,'lg': 961px - 24px,'xl': 1265px - 24px)
+
+/*v-app-bar
+$app-bar-scrolled-title-padding-bottom: rem(9)
+
+/*v-alert
+$alert-border-width: rem(4)
+$alert-font-size: rem(16)
+$alert-icon-size: rem(24)
+$alert-margin: rem(16)
+$alert-padding: rem(16)
+$alert-prominent-icon-font-size: rem(32)
+$alert-prominent-icon-size: rem(48)
+
+/*v-avatar
+$avatar-border-radius: 50%
+
+/*v-autocomplete
+$autocomplete-dense-enclosed-input-margin-top: rem(20)
+$autocomplete-enclosed-input-margin-top: rem(24)
+$autocomplete-focused-input: rem(64)
+
+/*v-badge
+$badge-border-radius: rem(10)
+$badge-bordered-width: rem(2)
+$badge-dot-border-radius: rem(4.5)
+$badge-dot-border-width: rem(1.5)
+$badge-dot-height: rem(9)
+$badge-dot-width: rem(9)
+$badge-font-size: rem(12)
+$badge-height: rem(20)
+$badge-icon-margin: 0 rem(-2)
+$badge-icon-padding: rem(4) rem(6)
+$badge-min-width: rem(20)
+$badge-padding: rem(2) rem(6)
+$badge-wrapper-margin: 0 rem(4)
+
+/*v-banner
+$banner-mobile-singleline-padding: rem(36)
+$banner-mobile-start-padding: rem(16)
+$banner-mobile-top-padding: rem(16)
+$banner-start-padding: rem(24)
+$banner-y-padding: rem(16)
+
+/*v-bottom-nav
+$bottom-nav-btn-max-width: rem(168)
+$bottom-nav-btn-min-width: rem(80)
+$bottom-nav-shift-btn-active-top: calc(100% - #{rem(22)})
+$bottom-nav-shift-btn-top: calc(100% - #{rem(12)})
+
+/*v-breadcrumbs
+$breadcrumbs-even-child-padding: 0 rem(12)
+$breadcrumbs-item-font-size: rem(14)
+$breadcrumbs-item-large-font-size: rem(16)
+$breadcrumbs-padding: 0 rem(14)
+
+/*v-btn
+$btn-icon-font-size: rem(18)
+$btn-icon-padding: rem(12)
+$btn-rounded-border-radius: rem(28)
+$btn-letter-spacing: normal
+$btn-active-opacity: 0
+$btn-focus-opacity: 0
+$btn-sizes: ()
+$btn-sizes: map-deep-merge(("x-small": 20, "small": 28, "default": 36, "large": 40, "x-large": 52, "filter-bar": 40), $btn-sizes)
+
+/*v-btn-toggle
+$btn-toggle-btn-width: rem(48)
+$btn-toggle-dense-btn-padding: 0 rem(8)
+$btn-toggle-group-btn-margin: rem(4)
+$btn-toggle-round-border-radius: rem(24)
+$btn-toggle-shaped-border-radius: rem(24)
+
+/*v-calendar
+$calendar-daily-day-font-size: rem(40)
+$calendar-daily-day-padding: 0 0 rem(3)
+$calendar-daily-interval-gutter-font-size: rem(10)
+$calendar-daily-interval-gutter-line-width: rem(8)
+$calendar-daily-interval-gutter-top: rem(-6)
+$calendar-daily-interval-gutter-width: rem(4)
+$calendar-daily-weekday-font-size: rem(11)
+$calendar-daily-weekday-padding: rem(3) 0 0 0
+$calendar-event-border-width: rem(1)
+$calendar-event-bottom-space: rem(1)
+$calendar-event-font-size: rem(12)
+$calendar-event-right-empty: rem(10)
+$calendar-line-width: rem(1)
+$calendar-weekly-day-label-font-size: rem(12)
+$calendar-weekly-day-label-margin: rem(4) 0 0 0
+$calendar-weekly-day-label-size: rem(32)
+$calendar-weekly-day-month-left: rem(36)
+$calendar-weekly-day-padding: rem(0) rem(0) rem(0) rem(0)
+$calendar-weekly-weekday-font-size: rem(11)
+$calendar-weekly-weekday-padding: 0 rem(4) 0 rem(4)
+
+/*v-card
+$card-title-adjacent-sibling-subtitle-margin-top: rem(-16)
+$card-actions-padding: rem(8)
+$card-btn-margin-x: rem(8)
+$card-btn-padding: 0 rem(8)
+$card-btn-small-margin-x: rem(4)
+$card-subtitle-padding: rem(16)
+$card-title-adjacent-sibling-subtitle-margin-top: rem(-16)
+
+/*v-chip
+$chip-avatar-size: rem(24)
+$chip-close-size: rem(18)
+$chip-filter-max-width: rem(24)
+$chip-icon-margin-after: rem(8)
+$chip-icon-margin-before: rem(-6)
+$chip-icon-right-margin-after: rem(-4)
+$chip-icon-right-margin-before: rem(8)
+$chip-icon-size: rem(24)
+$chip-line-height: rem(20)
+$chip-padding: 0 rem(12)
+$chip-pill-avatar-margin-after: rem(8)
+$chip-pill-avatar-margin-before: rem(-12)
+$chip-pill-avatar-size: rem(32)
+$chip-pill-filter-margin: 0 rem(16) 0 0
+
+/*v-chip-group
+$chip-group-content-padding: rem(4) 0
+$chip-group-margin: rem(4) rem(8) rem(4) 0
+
+/*-v-color-picker
+$color-picker-canvas-dot-size: rem(15)
+$color-picker-controls-padding: rem(16)
+$color-picker-edit-margin-top: rem(24)
+$color-picker-hue-margin-bottom: rem(24)
+$color-picker-input-height: rem(28)
+$color-picker-input-margin: rem(8)
+$color-picker-input-margin-bottom: rem(8)
+$color-picker-preview-dot-margin: rem(24)
+$color-picker-preview-dot-size: rem(30)
+$color-picker-slider-height: rem(10)
+$color-picker-swatch-color-border-radius: rem(2)
+$color-picker-swatch-color-height: rem(18)
+$color-picker-swatch-color-margin: rem(2) rem(4)
+$color-picker-swatch-color-width: rem(45)
+$color-picker-swatch-margin-bottom: rem(10)
+$color-picker-swatches-border-radius: rem(8)
+
+/*v-counter
+$counter-font-size: rem(12)
+$counter-min-height: rem(12)
+
+/*v-data-iterator
+$data-footer-icons-after-btn-margin-start: rem(7)
+$data-footer-icons-before-btn-margin-end: rem(7)
+$data-footer-padding: 0 rem(8)
+$data-footer-pagination-margin-end: rem(32)
+$data-footer-pagination-margin-start: rem(24)
+$data-footer-select-margin-end: rem(14)
+$data-footer-select-select-margin-start: rem(34)
+$data-footer-select-select-margin-y: rem(13)
+
+/*v-data-table
+$data-table-dense-header-height: rem(32)
+$data-table-dense-row-height: rem(24)
+$data-table-header-mobile-select-chip-height: rem(24)
+$data-table-header-mobile-select-margin-bottom: rem(8)
+$data-table-header-mobile-select-max-width: rem(56)
+$data-table-header-sort-badge-height: rem(18)
+$data-table-header-sort-badge-min-height: rem(18)
+$data-table-header-sort-badge-min-width: rem(18)
+$data-table-header-sort-badge-width: rem(18)
+$data-table-mobile-row-min-height: rem(48)
+$data-table-regular-header-height: rem(48)
+$data-table-regular-row-height: rem(48)
+$data-table-row-group-children-td-height: rem(35)
+$data-table-scroll-bar-width: rem(17)
+$edit-dialog-actions-padding: rem(8)
+$edit-dialog-content-padding: 0 rem(16)
+
+/*v-date-picker
+$date-picker-event-date-bottom: rem(8)
+$date-picker-event-margin: 0 rem(1)
+$date-picker-event-month-bottom: rem(6)
+$date-picker-event-size: rem(8)
+$date-picker-header-padding: rem(4) rem(16)
+$date-picker-table-date-button-height: rem(32)
+$date-picker-table-date-button-width: rem(32)
+$date-picker-table-date-padding: rem(8) 0
+$date-picker-table-date-width: rem(45)
+$date-picker-table-font-size: rem(12)
+$date-picker-table-height: rem(242)
+$date-picker-table-month-height: rem(56)
+$date-picker-table-month-max-width: rem(140)
+$date-picker-table-month-min-width: rem(40)
+$date-picker-table-padding: 0 rem(12)
+$date-picker-title-date-font-size: rem(34)
+$date-picker-title-year-bottom-margin: rem(8)
+$date-picker-title-year-font-size: rem(14)
+$date-picker-years-active-font-size: rem(26)
+$date-picker-years-active-padding: rem(10) 0
+$date-picker-years-font-size: rem(16)
+$date-picker-years-item-padding: rem(8) 0
+$date-picker-years-landscape-height: rem(290)
+$date-picker-years-portrait-height: rem(290)
+
+/*v-dialog
+$dialog-card-title-padding: rem(16)
+$dialog-margin: rem(24)
+
+/*v-divider
+$divider-inset-margin: rem(72)
+$divider-inset-margin-top: rem(8)
+$divider-inset-max-height: calc(100% - #{rem(16)})
+
+/*v-expansion-panel
+$expansion-panel-active-header-min-height: rem(64)
+
+// this should not have unit
+$expansion-panel-active-margin: 16
+
+//
+$expansion-panel-content-padding: 0 rem(24) rem(16)
+$expansion-panel-header-min-height: rem(48)
+$expansion-panel-header-padding: rem(16) rem(24)
+
+/*v-file-input
+$file-input-chip-margin: rem(4)
+$file-input-filled-padding-top: rem(22)
+$file-input-outlined-dense-padding: rem(3) 0
+$file-input-outlined-padding: rem(6) 0
+$file-input-slot-min-height: rem(32)
+
+/*v-footer
+$footer-padding: rem(6) rem(16)
+$footer-padless-padding: 0
+
+/*v-icon
+$icon-size: rem(24)
+$icon-size-dense: rem(20)
+
+/*v-img
+$img-preload-filter: blur(#{rem(2)})
+
+/*v-input
+$input-dense-slot-margin-bottom: rem(4)
+$input-font-size: rem(16)
+$input-icon-height: rem(24)
+$input-icon-min-width: rem(24)
+$input-icon-width: rem(24)
+$input-label-height: rem(20)
+$input-label-letter-spacing: rem(-.2)
+$input-max-height: rem(32)
+$input-prepend-append-outer-margin: rem(9)
+$input-slot-margin-bottom: rem(8)
+
+/*v-label
+$label-font-size: rem(16)
+$label-min-height: rem(8)
+
+/*v-list
+$avatar-margin-x: rem(16)
+$list-border-radius: 0
+$list-dense-content-padding: rem(8) 0
+$list-dense-icon-height: rem(24)
+$list-dense-icon-margin: rem(8)
+$list-dense-min-height: rem(40)
+$list-dense-subheader-height: rem(40)
+$list-dense-subheader-padding: 0 rem(8)
+$list-dense-subheading-padding: 0 rem(8)
+$list-group-dense-sub-group-header-padding: rem(24)
+$list-group-header-icon-min-width: rem(48)
+$list-group-items-item-padding: rem(40)
+$list-group-nav-no-action-item-padding: rem(64)
+$list-group-no-action-item-padding: rem(72)
+$list-group-no-action-sub-group-item-padding: rem(88)
+$list-group-sub-group-child-margin: rem(16)
+$list-group-sub-group-header-margin: rem(32)
+$list-group-sub-group-item-padding: rem(80)
+$list-item-action-icon-margin: rem(32)
+$list-item-action-margin: rem(12) 0
+$list-item-avatar-first-child-margin: rem(16)
+$list-item-avatar-horizontal-margin: rem(8)
+$list-item-avatar-horizontal-margin-x: rem(-16)
+$list-item-avatar-margin-y: rem(8)
+$list-item-child-last-type-margin: rem(16)
+$list-item-child-min-widthL: rem(24)
+$list-item-content-children-margin-bottom: rem(2)
+$list-item-content-padding: rem(12) 0
+$list-item-dense-three-line-min-height: rem(76)
+$list-item-dense-two-line-min-height: rem(60)
+$list-item-icon-margin: rem(16) 0
+$list-item-icon-margin-y: rem(16)
+
+// These 3 should not have units
+$list-item-min-height: 48
+$list-item-two-line-min-height: 64
+$list-item-three-line-min-height: 88
+
+//
+$list-item-padding: 0 rem(16)
+$list-item-three-line-avatar-action-margin: rem(16)
+$list-item-two-line-icon-margin-bottom: rem(32)
+$list-nav-item-padding: 0 rem(8)
+$list-nav-padding-left: rem(8)
+$list-nav-padding-right: rem(8)
+$list-nav-rounded-dense-item-margin-bottom: rem(4)
+$list-nav-rounded-item-dense-margin-bottom: rem(4)
+$list-nav-rounded-item-margin-bottom: rem(8)
+$list-padding: rem(8) 0
+$list-shaped-padding: rem(8)
+$list-subheader-padding-top: 0
+
+/*v-messages
+$messages-font-size: rem(12)
+$messages-min-height: rem(14)
+
+/*v-navigation-drawer
+$navigation-drawer-border-width: rem(1)
+
+/*v-overflow-btn
+$overflow-append-inner-height: rem(48)
+$overflow-append-inner-width: rem(42)
+$overflow-append-prepend-margin-bottom: rem(12)
+$overflow-append-prepend-margin-top: rem(12)
+$overflow-dense-input-margin-x: rem(16)
+$overflow-dense-slot-height: rem(38)
+$overflow-editable-select-slot-padding: rem(8) rem(16)
+$overflow-focused-active-slot-box-shadow: 0 rem(1) rem(6) 0 rgba(32, 33, 36, 0.28)
+$overflow-input-slot-border-width: rem(2) 0
+$overflow-label-margin-x: rem(16)
+$overflow-label-top: calc(50% - rem(10))
+$overflow-margin-top: rem(12)
+$overflow-menu-content-box-shadow: 0 rem(4) rem(6) 0 rgba(32, 33, 36, 0.28)
+$overflow-segmented-selections-btn-height: rem(48)
+$overflow-segmented-selections-btn-margin-x: rem(-16)
+$overflow-selection-comma-margin-x: rem(16)
+$overflow-slot-height: rem(48)
+
+/*v-pagination
+$pagination-item-height: rem(34)
+$pagination-item-min-width: rem(34)
+$pagination-item-padding: 0 rem(5)
+$pagination-more-height: rem(32)
+$pagination-more-width: rem(32)
+$pagination-navigation-height: rem(32)
+$pagination-navigation-margin: rem(4) rem(10)
+$pagination-navigation-width: rem(32)
+
+/*v-picker
+$picker-landscape-title-width: rem(170)
+$picker-title-padding: rem(16)
+
+/*v-progress-linear
+$progress-linear-stream-border-width: rem(4)
+$progress-linear-stripe-background-size: rem(40) rem(40)
+
+/*v-radio-group
+$radio-group-padding: rem(8)
+$radio-margin-right: rem(16)
+
+/*v-select
+$select-chip-margin: rem(4)
+$select-chips-box-enclosed-selections-min-height: rem(68)
+$select-chips-dense-selections-min-height: rem(40)
+$select-chips-dense-selections-padding-top: rem(40)
+$select-chips-selections-padding-top: rem(42)
+$select-dense-chip-margin: 0 rem(4) 0 rem(4)
+$select-dense-selections-margin: rem(5) rem(4) rem(3) 0
+$select-outlined-dense-selections-padding-top: rem(4) 0
+$select-outlined-selections-padding-top: rem(8) 0
+$select-prefix-line-height: rem(20)
+$select-prefix-top: rem(7)
+$select-selections-line-height: rem(18)
+$select-selections-margin: rem(7) rem(4) rem(7) 0
+$select-selections-padding-top: rem(20)
+$select-small-chips-dense-selections-min-height: rem(38)
+$select-small-chips-selections-min-height: rem(26)
+
+/*v-skeleton-loader
+$skeleton-loader-actions-button-margin: rem(12)
+$skeleton-loader-actions-padding: rem(16) rem(16) rem(8)
+$skeleton-loader-article-heading-margin-top-left: rem(16)
+$skeleton-loader-article-heading-margin-x: rem(16)
+$skeleton-loader-article-paragraph-padding: rem(16)
+$skeleton-loader-avatar-height: rem(56)
+$skeleton-loader-avatar-width: rem(48)
+$skeleton-loader-button-height: rem(36)
+$skeleton-loader-button-width: rem(64)
+$skeleton-loader-card-heading-loader-heading-margin: rem(16)
+$skeleton-loader-card-text-padding: rem(16)
+$skeleton-loader-chip-border-radius: rem(16)
+$skeleton-loader-chip-height: rem(32)
+$skeleton-loader-chip-width: rem(96)
+$skeleton-loader-date-picker-days-height: rem(40)
+$skeleton-loader-date-picker-days-margin: rem(4)
+$skeleton-loader-date-picker-days-padding: 0 rem(12)
+$skeleton-loader-date-picker-days-width: rem(40)
+$skeleton-loader-date-picker-options-avatar-child-margin: rem(8)
+$skeleton-loader-date-picker-options-avatar-height: rem(40)
+$skeleton-loader-date-picker-options-avatar-width: rem(40)
+$skeleton-loader-date-picker-options-padding: rem(16)
+$skeleton-loader-divider-border-radius: rem(1)
+$skeleton-loader-divider-height: rem(2)
+$skeleton-loader-heading-border-radius: rem(12)
+$skeleton-loader-heading-height: rem(24)
+$skeleton-loader-image-height: rem(200)
+$skeleton-loader-item-avatar-height: rem(40)
+$skeleton-loader-item-avatar-margin: rem(16)
+$skeleton-loader-item-avatar-width: rem(40)
+$skeleton-loader-item-padding: 0 rem(16)
+$skeleton-loader-item-three-line-height: rem(88)
+$skeleton-loader-item-two-line-height: rem(72)
+$skeleton-loader-list-item-height: rem(48)
+$skeleton-loader-table-cell-height: rem(48)
+$skeleton-loader-table-cell-width: rem(88)
+$skeleton-loader-table-heading-padding: rem(16)
+$skeleton-loader-table-tbody-padding: rem(16) rem(16) 0
+$skeleton-loader-table-tfoot-avatar-height: rem(40)
+$skeleton-loader-table-tfoot-avatar-width: rem(40)
+$skeleton-loader-table-tfoot-children-margin: rem(8)
+$skeleton-loader-table-tfoot-padding: rem(16)
+$skeleton-loader-table-thead-heading-padding: rem(16)
+$skeleton-loader-table-thead-padding: rem(16)
+$skeleton-loader-text-border-radius: rem(6)
+$skeleton-loader-text-height: rem(12)
+
+/*v-slider
+$slider-horizontal-right: rem(8)
+$slider-label-margin-end: rem(12)
+$slider-label-margin-start: rem(12)
+$slider-thumb-focused-size-increase: rem(24)
+$slider-thumb-label-height: rem(32)
+$slider-thumb-label-width: rem(32)
+$slider-thumb-size: rem(12)
+$slider-track-width: rem(2)
+$slider-vertical-margin-bottom: rem(12)
+$slider-vertical-margin-top: rem(12)
+$slider-vertical-min-height: rem(150)
+
+/*v-slide-group
+$slide-group-prev-basis: rem(52)
+
+/*v-snackbar
+$snackbar-bottom: rem(8)
+$snackbar-btn-margin-left: rem(24)
+$snackbar-btn-margin-right: rem(-8)
+$snackbar-content-first-btn-margin: rem(42)
+$snackbar-content-min-height: rem(48)
+$snackbar-content-padding: rem(8) rem(16)
+$snackbar-corner-offset: rem(16)
+$snackbar-left: rem(8)
+$snackbar-multi-line-content-min-height: rem(68)
+$snackbar-right: rem(8)
+$snackbar-top: rem(8)
+$snackbar-vertical-content-btn-margin-top: rem(18)
+$snackbar-vertical-content-padding: rem(16) rem(16) rem(8)
+$snackbar-wrapper-max-width: rem(672)
+$snackbar-wrapper-min-width: rem(320)
+
+/*v-speed-dial
+$speed-dial-button-margin: rem(6)
+$speed-dial-padding: rem(16)
+
+/*v-stepper
+$stepper-alt-labels-flex-basis: rem(175)
+$stepper-alt-labels-header-divider: rem(35) rem(-67) 0
+$stepper-alt-labels-step-step-margin-bottom: rem(11)
+$stepper-content-btn-margin: rem(24) rem(8) rem(8)
+$stepper-content-padding: rem(24) rem(24) rem(16) rem(24)
+$stepper-header-divider-margin: 0 rem(-16)
+$stepper-header-height: rem(72)
+$stepper-step-padding: rem(24)
+$stepper-step-step-height: rem(24)
+$stepper-step-step-margin: rem(8)
+$stepper-step-step-min-width: rem(24)
+$stepper-step-step-width: rem(24)
+$stepper-vertical-content-ltr-margin: rem(-8) rem(-36) rem(-16) rem(36)
+$stepper-vertical-content-padding: rem(16) rem(60) rem(16) rem(23)
+$stepper-vertical-content-rtl-margin: rem(-8) rem(36) rem(-16) rem(-36)
+$stepper-vertical-padding-bottom: rem(36)
+$stepper-vertical-step-padding: rem(24) rem(24) rem(16)
+$stepper-vertical-step-step-margin: rem(12)
+
+/*v-subheader
+$subheader-inset-margin: rem(56)
+$subheader-item-single-height: rem(48)
+$subheader-left-padding: rem(16)
+$subheader-right-padding: rem(16)
+
+/*v-switch
+$switch-dirty-offset-x: rem(20)
+$switch-ripple-dense-top: calc(50% - #{rem(22)})
+$switch-ripple-dense-x: rem(-12)
+$switch-ripple-top: calc(50% - #{rem(24)})
+$switch-ripple-x: rem(-14)
+$switch-thumb-dense-height: rem(18)
+$switch-thumb-dense-width: rem(18)
+$switch-thumb-height: rem(20)
+$switch-thumb-top: calc(50% - #{rem(10)})
+$switch-thumb-width: rem(20)
+$switch-track-border-radius: rem(8)
+$switch-track-dense-height: rem(12)
+$switch-track-dense-inset-height: rem(22)
+$switch-track-dense-inset-width: rem(44)
+$switch-track-dense-top: calc(50% - #{rem(12)})
+$switch-track-dense-width: rem(32)
+$switch-track-height: rem(14)
+$switch-track-inset-border-radius: rem(14)
+$switch-track-inset-height: rem(28)
+$switch-track-inset-width: rem(48)
+$switch-track-top: calc(50% - #{rem(7)})
+$switch-track-width: rem(36)
+$switch-track-x: rem(2)
+$switch-width: rem(38)
+
+/*v-system-bar
+$system-bar-icon-margin-right: rem(4)
+$system-bar-padding: 0 rem(8)
+$system-bar-window-icon-margin-right: rem(8)
+
+/*v-tabs
+$tabs-bar-height: rem(48)
+$tabs-icons-and-text-bar-height: rem(72)
+$tabs-icons-and-text-first-tab-margin-bottom: rem(6)
+$tabs-item-align-with-title-margin: rem(42)
+$tabs-item-max-width: rem(360)
+$tabs-item-min-width: rem(90)
+$tabs-item-padding: 0 rem(16)
+
+/*v-textarea
+$textarea-box-enclosed-prefix-margin-top: rem(24)
+$textarea-box-enclosed-single-outlined-label-top: rem(18)
+$textarea-box-enclosed-single-outlined-margin-top: rem(10)
+$textarea-dense-append-prepend-margin-top: rem(8)
+$textarea-dense-box-enclosed-single-outlined-margin-top: rem(6)
+$textarea-enclosed-text-slot-margin: rem(-12)
+$textarea-enclosed-text-slot-padding: rem(12)
+$textarea-min-height: rem(32)
+$textarea-prefix-padding-top: rem(2)
+$textarea-solo-append-padding: rem(12)
+$textarea-solo-append-prepend-margin-top: rem(12)
+
+/*v-text-field
+$text-field-append-prepend-margin: rem(4)
+$text-field-counter-margin: rem(8)
+$text-field-dense-icon-append-prepend-margin-top: rem(8)
+$text-field-dense-label-active-transform: translateY(#{rem(-10)}) scale(0.75)
+$text-field-dense-label-top: rem(17)
+$text-field-dense-padding: rem(4) rem(0) rem(2)
+$text-field-dense-prepend-append-margin-top: rem(14)
+$text-field-details-margin-bottom: rem(8)
+$text-field-details-min-height: rem(14)
+$text-field-enclosed-details-padding: 0 rem(12)
+$text-field-enclosed-prepend-append-margin-top: rem(17)
+$text-field-filled-full-width-label-active-transform: translateY(#{rem(-6)}) scale(0.75)
+$text-field-filled-full-width-label-top: rem(18)
+$text-field-filled-full-width-outlined-dense-slot-min-height: rem(52)
+$text-field-filled-full-width-outlined-single-line-slot-min-height: rem(42)
+$text-field-filled-full-width-outlined-slot-min-height: rem(56)
+$text-field-filled-margin-top: rem(22)
+$text-field-label-active-transform: translateY(#{rem(-18)}) scale(0.75)
+$text-field-label-top: rem(6)
+$text-field-line-height: rem(20)
+$text-field-outlined-append-prepend-outer-margin-top: rem(18)
+$text-field-outlined-dense-label-position-x: rem(10)
+$text-field-outlined-dense-label-position-y: rem(-16)
+$text-field-outlined-fieldset-border: rem(1) solid currentColor
+$text-field-outlined-fieldset-border-width: rem(1)
+$text-field-outlined-fieldset-padding: rem(8)
+$text-field-outlined-fieldset-top: rem(-5)
+$text-field-outlined-label-position-x: rem(18)
+$text-field-outlined-label-position-y: rem(-24)
+$text-field-outlined-legend-line-height: rem(11)
+$text-field-outlined-margin-bottom: rem(16)
+$text-field-outlined-prepend-append-margin-top: rem(13)
+$text-field-outlined-rounded-slot-padding: 0 rem(24)
+$text-field-padding: rem(8) 0 rem(8)
+$text-field-prefix-max-height: rem(32)
+$text-field-rounded-border-radius: rem(28)
+$text-field-rounded-legend-margin: rem(12)
+$text-field-shaped-border-radius: rem(16) rem(16) 0 0
+$text-field-single-line-label-top: rem(11)
+$text-field-single-line-prepend-append-margin-top: rem(9)
+$text-field-solo-control-min-height: rem(48)
+$text-field-solo-dense-control-min-height: rem(380)
+$text-field-solo-dense-outer-margin-top: rem(7)
+$text-field-solo-label-top: calc(50% - #{rem(9)})
+$text-field-solo-outer-margin-top: rem(12)
+$text-field-outlined-rounded-slot-padding: 0 rem(16)
+$text-field-rounded-border-radius: rem(4)
+$text-field-dense-append-prepend-margin: rem(0)
+
+/*v-timeline
+$timeline-divider-width: rem(96)
+$timeline-dot-large-size: rem(52)
+$timeline-dot-regular-size: rem(38)
+$timeline-dot-small-size: rem(24)
+$timeline-inner-dot-large-size: rem(42)
+$timeline-inner-dot-regular-size: rem(30)
+$timeline-inner-dot-small-size: rem(18)
+$timeline-item-padding: rem(24)
+$timeline-line-width: rem(2)
+$timeline-wedge-size: rem(10)
+
+
+
+/*v-toolbar
+$toolbar-btn-icon-size: rem(48)
+$toolbar-content-padding-y: rem(4)
+$toolbar-content-padding-x: rem(16)
+$toolbar-title-padding: rem(20)
+$toolbar-collapsed-max-width:rem(112)
+$toolbar-collapsed-border-radius: rem(24) 
+$toolbar-promient-padding: rem(6)
+
+/*v-timepicker*/
+$time-picker-ampm-padding: rem(10)
+$time-picker-ampm-title-font-size: rem(16)
+$time-picker-ampm-title-margin-bottom: rem(6)
+$time-picker-ampm-title-margin-start: rem(8)
+$time-picker-clock-center-size: rem(8)
+$time-picker-clock-end-border-width: rem(2)
+$time-picker-clock-end-size: rem(10)
+$time-picker-clock-end-top: rem(-4)
+$time-picker-clock-hand-height: calc(50% - rem(4))
+$time-picker-clock-hand-left: calc(50% - rem(1))
+$time-picker-clock-hand-width: rem(2)
+$time-picker-clock-inner-hand-height: rem(14)
+$time-picker-clock-inner-offset: rem(27)
+$time-picker-clock-max-width: rem(290)
+$time-picker-clock-padding: rem(10)
+$time-picker-indicator-size: rem(40)
+$time-picker-landscape-ampm-title-margin: rem(16) 0 0
+$time-picker-landscape-title-btn-height: rem(55)
+$time-picker-number-font-size: rem(16)
+$time-picker-title-btn-height: rem(70)
+
+
+/*v-tooltip
+//should not have unit
+$tooltip-font-size: 12
+
+//
+$tooltip-padding: rem(5) rem(16)
+$toolbar-collapsed-border-radius: rem(24)
+$toolbar-collapsed-max-width: rem(112)
+$toolbar-content-padding-x: rem(16)
+$toolbar-content-padding-y: rem(4)
+$toolbar-promient-padding: rem(6)
+$toolbar-title-padding: rem(20)
+
+/*v-treeview
+//Should not have unit
+$treeview-node-height: 48
+$treeview-node-height-dense: 48
+
+//
+$treeview-node-level-width: rem(24)
+$treeview-node-margin: rem(6)
+$treeview-node-padding: rem(8)
+$treeview-node-shaped-margin: rem(8)
+
+/*v-window
+$window-controls-margin: 0 rem(16)
+$window-controls-top: calc(50% - #{rem(20)})
+
+$spacer: 0.25rem
+
+/* Rounded Helper
+$border-radius-root: 0.25rem
+$rounded: ()
+$rounded: map-deep-merge((0: 0,'sm': $border-radius-root / 2,null: $border-radius-root,'lg': $border-radius-root * 2,'xl': $border-radius-root * 6,'pill': 9999px,'circle': 50%), $rounded)
+
+$shades: () !default
+$shades: map-deep-merge(('black': #000000,'white': #ffffff,'transparent': transparent),$shades)
+

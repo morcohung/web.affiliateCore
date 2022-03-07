@@ -1,0 +1,34 @@
+.the-header {
+    &::v-deep {
+        .main-app-bar {
+            &.v-app-bar {
+                &.v-toolbar {
+                    &.v-sheet {
+                        height: rem(72);
+                        background-color: $inner-mine-shaft;
+                        .v-toolbar__content {
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+        @import "../03_organisms/brand-logo";
+
+        .color-blue {
+            color: $blue-link;
+        }
+        @include icon(("icon-hamburger-menu", "icon-calendar", "icon-download", "icon-search", "icon-settings"));
+        &.full-table-view {
+            .main-app-bar {
+                &.v-app-bar {
+                    &.v-toolbar {
+                        &.v-sheet {
+                            height: rem(88);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

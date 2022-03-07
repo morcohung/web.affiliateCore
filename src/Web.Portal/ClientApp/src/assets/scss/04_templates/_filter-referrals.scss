@@ -1,0 +1,9 @@
+.flag-icon {
+    height: 2rem;
+    width: 2.5rem;
+    background-size: 150% auto;
+    &.flag-icon-cn {
+        background-size: 125% auto;
+        background-color: red;
+    }
+}

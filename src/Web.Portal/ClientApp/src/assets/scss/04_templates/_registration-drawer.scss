@@ -1,0 +1,80 @@
+.registration-drawer {
+    max-width: rem(396);
+    @import "../03_organisms/brand-logo";
+    @include icon(("icon-close", "icon-radio-on", "icon-radio-off", "icon-refresh-2"));
+
+    &::v-deep {
+        @include icon(
+            (
+                "icon-show-password",
+                "icon-hide-password",
+                "icon-arrowhead-down",
+                "icon-arrowhead-up",
+                "icon-checked",
+                "icon-unchecked"
+            ),
+            (
+                "class": "v-icon",
+            )
+        );
+        @include icon(("stick-arrow-right"));
+        .v-icon {
+            font-size: rem(16);
+        }
+        .text-link--text {
+            color: $blue-link;
+        }
+        .text-link {
+            color: $blue-link;
+        }
+    }
+    .color-orange {
+        color: $orange;
+    }
+}
+.v-overlay {
+    &::v-deep {
+        .v-overlay__content {
+            width: 100%;
+        }
+    }
+}
+
+.v-expansion-panel {
+    background-color: transparent !important;
+    min-height: rem(80);
+
+    &:not(:first-child) {
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    &:before {
+        display: none;
+    }
+    .v-expansion-panel-header {
+        height: rem(80);
+    }
+}
+.wrapped-label {
+    &::v-deep {
+        .v-text-field__slot {
+            .v-label {
+                white-space: normal;
+                overflow: visible;
+                line-height: 1.2em;
+            }
+            textarea {
+                margin-top: rem(55);
+            }
+        }
+    }
+}
+
+.v-input {
+    &::v-deep {
+        .color-orange {
+            color: $orange !important;
+        }
+    }
+}
+@import "../03_organisms/brand-stepper";
+@import "../02_molecules/outline-styles";

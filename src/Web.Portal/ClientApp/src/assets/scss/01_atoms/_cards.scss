@@ -1,0 +1,36 @@
+@mixin card-base($card-background: true) {
+  border-radius: rem(4);
+  @if $card-background == true {
+    background: $white;
+  }
+  padding: rem(16);
+  .card-header {
+    @extend %-card-header;
+  }
+  .inner-card-ribbon {
+    /*Background colors are set in _background-colors.scss */
+    padding: rem(8) rem(16);
+    margin: rem(-16) rem(-16) rem(16);
+    &.top-0 {
+      margin-top: rem(-16);
+      border-top-left-radius: rem(4);
+      border-top-right-radius: rem(4);
+    }
+  }
+}
+
+//needs _bars.scss to be included
+@import "bars";
+
+%-card-header {
+  //referenced from bars mixin
+  //header(class-name,height,pad-top,pad-right,pad-bot,pad-left)
+  @include header("card-header-group", 63, 8, 8, 8, 16);
+  margin: rem(-16) rem(-16) rem(16);
+  border-top-left-radius: rem(4);
+  border-top-right-radius: rem(4);
+  border-bottom: rem(1) solid rgba($black, 0.12);
+  a {
+    color: inherit;
+  }
+}

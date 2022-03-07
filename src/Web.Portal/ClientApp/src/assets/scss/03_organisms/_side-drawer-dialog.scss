@@ -1,0 +1,34 @@
+.v-overlay {
+    &::v-deep {
+        .v-overlay__content {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+.v-dialog__content {
+    &::v-deep {
+        .desktop-drawer {
+            max-width: rem(336);
+            left: auto;
+            right: 0;
+            > .v-sheet {
+                height: 100%;
+                overflow-y: auto;
+            }
+        }
+        .mobile-drawer {
+            > .v-sheet {
+                height: 100%;
+                overflow-y: auto;
+            }
+        }
+        .v-app-bar {
+            height: rem(72);
+            .v-toolbar__content {
+                height: 100%;
+            }
+        }
+        @include icon(("icon-download"));
+    }
+}

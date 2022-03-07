@@ -1,0 +1,21 @@
+.color-link {
+    color: $blue-link;
+}
+.theme--light.v-btn {
+    &.gray--text {
+        border-color: rgba($black, 0.08);
+    }
+}
+.v-text-field {
+    &::v-deep {
+        @include icon(
+            ("icon-arrowhead-down", "icon-arrowhead-up", "icon-show-password", "icon-hide-password"),
+            (
+                class: "v-icon",
+            )
+        );
+        .v-icon {
+            font-size: rem(16);
+        }
+    }
+}

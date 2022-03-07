@@ -1,0 +1,11 @@
+.color-black {
+    color: rgba($black, 0.87);
+}
+.v-overlay {
+    &::v-deep {
+        .v-overlay__content {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}

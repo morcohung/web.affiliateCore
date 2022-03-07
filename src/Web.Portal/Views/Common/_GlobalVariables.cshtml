@@ -1,0 +1,27 @@
+﻿<script language="javascript" type="text/javascript">
+    var gv = {
+        lan: '@ViewBag.Language',
+        lans: JSON && JSON.parse('@Html.Raw(ViewBag.LanguagesArray)'),
+        googletagid: '@ViewBag.GoogleTagId',
+        cdnurl:'@ViewBag.CdnUrl'
+    };
+
+    function setCurrentlan() {
+        var language = location.pathname.split("/")[1];
+        var matchlan = gv.lans.filter(function (lan) { return lan.value === language; });
+        var deflan = matchlan.length > 0 ? matchlan[0] : getbrowserlan();
+        gv.language = deflan;
+        gv.lan = deflan.value;
+    }
+
+    function getbrowserlan() {
+        var browserlan = navigator.language;
+        var deflan = gv.lans.filter(function (lan) {
+            browserlan = browserlan.substr(0, 2).toLowerCase();
+            return lan.value.indexOf(browserlan) != -1;
+        });
+        return deflan.length != 0 ? deflan[0] : gv.lans[0];
+    }
+
+    setCurrentlan();
+</script>

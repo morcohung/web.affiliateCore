@@ -1,0 +1,20 @@
+.v-input {
+    &::v-deep {
+        .text-md {
+            &:before {
+                font-size: rem(16);
+            }
+        }
+        @include icon(
+            (icon-stick-arrow-left, icon-close-o),
+            (
+                "class": "v-icon",
+            )
+        );
+        .v-input__append-inner ~ .v-input__append-inner {
+            display: none;
+        }
+    }
+}
+
+@import "../../assets/scss/03_organisms/_side-drawer-dialog";

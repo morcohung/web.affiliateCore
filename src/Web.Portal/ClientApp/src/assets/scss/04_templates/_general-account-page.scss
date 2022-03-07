@@ -1,0 +1,14 @@
+.link {
+    cursor: pointer;
+    transition: opacity 0.25s;
+    &:hover {
+        opacity: 0.6;
+    }
+}
+.general-account-lobby {
+    background-color: $wild-sand;
+    min-height: 50vh;
+}
+.color-black {
+    color: $black;
+}

@@ -1,0 +1,154 @@
+@import "../03_organisms/flags";
+.v-dialog__content {
+    &::v-deep {
+        .desktop-burger-menu {
+            max-width: rem(336);
+            left: auto;
+            right: 0;
+            > .v-sheet {
+                height: 100%;
+                overflow-y: auto;
+            }
+        }
+        .mobile-burger-menu {
+            max-width: rem(336);
+            left: auto;
+            right: 0;
+            > .v-sheet {
+                height: 100%;
+                overflow-y: auto;
+            }
+        }
+    }
+    .v-dialog {
+        &.desktop-burger-menu,
+        &.mobile-burger-menu {
+            .side-app-bar {
+                height: rem(72);
+
+                &.v-sheet {
+                    &.v-toolbar {
+                        &.v-toolbar--absolute {
+                            &.v-toolbar--flat {
+                                height: rem(72);
+                                &::v-deep {
+                                    .v-toolbar__content {
+                                        height: 100%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.flags {
+    width: rem(25);
+    height: rem(25);
+    display: inline-block;
+    opacity: 1;
+    @each $_flag in $_flags {
+        // @include flag(nth($_flag, 1), round);
+        @include flag(nth($_flag, 1), round);
+    }
+}
+%-offscreen {
+    .v-navigation-drawer {
+        margin-right: -100%;
+    }
+}
+%-onscreen {
+    .v-navigation-drawer {
+        margin-right: 0;
+    }
+}
+%-transition-timing {
+    .v-navigation-drawer {
+        transition: margin 0.25s;
+    }
+}
+%-transition-activator {
+    opacity: 1;
+}
+.the-burger-menu {
+    &::v-deep {
+        .side-app-bar {
+            height: rem(72);
+            &::v-deep {
+                .v-toolbar__content {
+                    height: 100%;
+                }
+            }
+        }
+        &.slide-enter-active {
+            transition: opacity 0.25s;
+            @extend %-transition-timing;
+            &.slide-enter {
+                @extend %-transition-activator;
+
+                @extend %-offscreen;
+            }
+            &.slide-enter-to {
+                @extend %-transition-activator;
+                @extend %-onscreen;
+            }
+        }
+        &.slide-leave-active {
+            transition: opacity 0.25s;
+            @extend %-transition-timing;
+            &.slide-leave-to {
+                @extend %-transition-activator;
+                @extend %-offscreen;
+            }
+            &.slide-leave {
+                @extend %-transition-activator;
+                @extend %-onscreen;
+            }
+        }
+        .v-overlay__content {
+            height: 100%;
+            width: 100%;
+            > div {
+                height: 100%;
+            }
+        }
+
+        .theme--dark.v-list-item--active {
+            &:before {
+                opacity: 0;
+            }
+        }
+        .pitch-black {
+            background: $pitch-black;
+        }
+        .color-white {
+            color: white;
+        }
+    }
+}
+
+.v-overlay {
+    z-index: 6 !important;
+}
+
+@include icon(
+    (
+        "icon-close",
+        "icon-home",
+        "icon-tandc",
+        "icon-help-o",
+        "icon-support-o",
+        "icon-brandlogo",
+        "icon-avatar",
+        "icon-show-password",
+        "icon-hide-password",
+        "icon-announcement",
+        "icon-logout",
+        "icon-aboutus",
+        "icon-creatives",
+        "icon-payout",
+        "icon-caretrightthin"
+    )
+);

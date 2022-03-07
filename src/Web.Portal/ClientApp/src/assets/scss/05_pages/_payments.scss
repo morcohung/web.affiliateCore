@@ -1,0 +1,23 @@
+@include icon(("icon-radio-on", "icon-radio-off", "icon-check-o"));
+.v-input {
+    &::v-deep {
+        @include icon(
+            ("icon-arrowhead-down"),
+            (
+                class: "v-icon",
+            )
+        );
+        .v-icon {
+            font-size: rem(16);
+        }
+    }
+}
+
+.icon-check-o {
+    font-size: rem(80);
+    color: $chelsea-cucumber;
+}
+
+.color-orange {
+    color: $orange;
+}

@@ -1,0 +1,32 @@
+.v-card {
+    &::v-deep {
+        .theme--light {
+            &.v-app-bar {
+                &.v-toolbar {
+                    &.v-sheet {
+                        background-color: inherit;
+                        h1 {
+                            > .v-btn {
+                                margin-left: rem(8);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.member-detail-subheader {
+    background-color: $white;
+    border-radius: rem(8);
+    overflow: hidden;
+}
+.v-list {
+    &.v-list-item--dense {
+        .v-list-item {
+            min-height: rem(34);
+        }
+    }
+}
+@include icon(("icon-stick-arrow-right", "icon-stick-arrow-left", "icon-award", "icon-history", "icon-document"));
+@import "../02_molecules/outline-styles";

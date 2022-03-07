@@ -1,0 +1,120 @@
+$_flags: (
+    vi-vn: (
+        region-name: vietnam,
+        round-flag-x: -2,
+        round-flag-y: 0,
+    ),
+    en-gb: (
+        region-name: uk,
+        round-flag-x: -28,
+        round-flag-y: 0,
+    ),
+    th-th: (
+        region-name: thailand,
+        round-flag-x: -56,
+        round-flag-y: 0,
+    ),
+    roe: (
+        region-name: roe,
+        round-flag-x: -84,
+        round-flag-y: 0,
+    ),
+    roa: (
+        region-name: roa,
+        round-flag-x: -110,
+        round-flag-y: 0,
+    ),
+    ms-my: (
+        region-name: malaysia,
+        round-flag-x: -138,
+        round-flag-y: 0,
+    ),
+    ko-kr: (
+        region-name: korea,
+        round-flag-x: -164,
+        round-flag-y: 0,
+    ),
+    ja-jp: (
+        region-name: japan,
+        round-flag-x: -191,
+        round-flag-y: 0,
+    ),
+    row: (
+        region-name: row,
+        round-flag-x: -218,
+        round-flag-y: 0,
+    ),
+    id-id: (
+        region-name: indonesia,
+        round-flag-x: -246,
+        round-flag-y: 0,
+    ),
+    zh-cn: (
+        region-name: china,
+        round-flag-x: -273,
+        round-flag-y: 0,
+    ),
+    km-kh: (
+        region-name: cambodia,
+        round-flag-x: -300,
+        round-flag-y: 0,
+    ),
+    pt-br: (
+        region-name: brazil,
+        round-flag-x: -327,
+        round-flag-y: 0,
+    ),
+    asia-all: (
+        region-name: asia-all,
+        round-flag-x: -4,
+        round-flag-y: 0,
+    ),
+    hi-in: (
+        region-name: india,
+        round-flag-x: -4,
+        round-flag-y: 0,
+    ),
+);
+
+@mixin flag($_name: "", $type: "") {
+    @if ($type == "footer") {
+        @if map-deep-get($_flags, $_name) {
+            &.#{$_name},
+            &.reg-#{map-deep-get($_flags, $_name, region-name)} {
+                background-position: #{rem(map-deep-get($_flags, $_name, footer-flag-x))}
+                    #{rem(map-deep-get($_flags, $_name, footer-flag-y))};
+            }
+        }
+    }
+    @if (($type == "region")) {
+        &.reg-#{map-deep-get($_flags, $_name, region-name)} {
+            background-position: #{rem(map-deep-get($_flags, $_name, region-flag-x))}
+                #{rem(map-deep-get($_flags, $_name, region-flag-y))};
+        }
+    }
+    @if (($type == "round")) {
+        &.#{$_name} {
+            @if ($_name == "row") {
+                margin: 0;
+                flex: none;
+            }
+            border-radius: 50%;
+            background-position: #{rem(map-deep-get($_flags, $_name, round-flag-x))}
+                #{rem(map-deep-get($_flags, $_name, round-flag-y))};
+        }
+    }
+}
+
+.flags {
+    background: url("#{$cdn-path}/images/188-aff-flags.svg") 0 #{(55 / $base-font-size) * -1rem};
+    background-repeat: no-repeat;
+    background-size: auto #{rem(25)};
+    display: inline-block;
+    width: rem(25);
+    height: rem(25);
+    border-radius: 50%;
+}
+
+#change-lang span.flag {
+    float: right;
+}

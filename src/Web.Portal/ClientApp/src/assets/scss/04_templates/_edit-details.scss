@@ -1,0 +1,33 @@
+.edit-my-account-items {
+    max-width: rem(296);
+    @include respond-to("small") {
+        max-width: 100%;
+    }
+    @include respond-to("xsmall") {
+        max-width: 100%;
+    }
+    &::v-deep {
+        .v-app-bar {
+            height: rem(72);
+            .v-toolbar__content {
+                height: 100%;
+            }
+        }
+    }
+}
+.v-overlay {
+    &::v-deep {
+        .v-overlay__content {
+            width: 100%;
+            height: 100%;
+            div {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+.color-link {
+    color: $blue-link;
+}
+@include icon("icon-stick-arrow-left");

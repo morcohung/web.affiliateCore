@@ -1,0 +1,21 @@
+$btn-colors: (
+    'gainsboro-white': $gainsboro-white,
+    'mortar-gray': $mortar-gray,
+    'orange': $orange,
+    'silver': $silver,
+    'cloud-white': $cloud-white,
+    'dark-gray': $dark-gray,
+    'green': $green
+);
+@mixin v-btn-color($color) {
+    @if type-of($color) != color {
+        .v-btn {
+            @if map_has_key($btn-colors, $color) {
+                &.#{$color} {
+                    background-color: map-get($btn-colors, $color) !important;
+                    border-color: map-get($btn-colors, $color) !important;
+                }
+            }
+        }
+    }
+}

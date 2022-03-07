@@ -1,0 +1,16 @@
+.v-tab--active {
+    color: rgba($black, 0.87);
+    font-weight: bold;
+}
+.theme--light.v-tabs .v-tab--active:hover::before,
+.theme--light.v-tabs .v-tab--active::before {
+    opacity: 0;
+}
+.theme--light.v-tabs .v-tab:hover::before {
+    opacity: 0;
+}
+.trend-chart {
+    > .v-card {
+        height: 100%;
+    }
+}

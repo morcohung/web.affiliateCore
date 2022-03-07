@@ -1,0 +1,7 @@
+D:\188\web.affiliateCore\src\Affiliate.General\bin\Debug\netcoreapp3.1\Affiliate.General.deps.json
+D:\188\web.affiliateCore\src\Affiliate.General\bin\Debug\netcoreapp3.1\Affiliate.General.dll
+D:\188\web.affiliateCore\src\Affiliate.General\bin\Debug\netcoreapp3.1\Affiliate.General.pdb
+D:\188\web.affiliateCore\src\Affiliate.General\obj\Debug\netcoreapp3.1\Affiliate.General.AssemblyInfoInputs.cache
+D:\188\web.affiliateCore\src\Affiliate.General\obj\Debug\netcoreapp3.1\Affiliate.General.AssemblyInfo.cs
+D:\188\web.affiliateCore\src\Affiliate.General\obj\Debug\netcoreapp3.1\Affiliate.General.dll
+D:\188\web.affiliateCore\src\Affiliate.General\obj\Debug\netcoreapp3.1\Affiliate.General.pdb
